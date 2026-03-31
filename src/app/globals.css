@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --color-gold: #D4A017;
+  --color-gold-light: #F5C842;
+  --color-green: #2D7D46;
+  --color-green-light: #4CAF72;
+  --color-yellow: #FFD700;
+  --color-white: #FFFFFF;
+  --color-cream: #FFFDF5;
+  --color-dark: #1A2E1A;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-dark);
+  line-height: 1.6;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-green);
+  border-radius: 3px;
+}
+
+/* Hero gradient overlay */
+.hero-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(26, 46, 26, 0.85) 0%,
+    rgba(45, 125, 70, 0.6) 50%,
+    rgba(212, 160, 23, 0.4) 100%
+  );
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 48px rgba(45, 125, 70, 0.15);
+}
+
+/* Gold shimmer button */
+.btn-gold {
+  background: linear-gradient(135deg, #D4A017 0%, #F5C842 50%, #D4A017 100%);
+  background-size: 200% auto;
+  transition: background-position 0.4s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-gold:hover {
+  background-position: right center;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212, 160, 23, 0.4);
+}
+
+/* Green button */
+.btn-green {
+  background: linear-gradient(135deg, #2D7D46 0%, #4CAF72 100%);
+  transition: all 0.3s ease;
+}
+.btn-green:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(45, 125, 70, 0.4);
+}
+
+/* Section dividers */
+.wave-divider {
+  overflow: hidden;
+  line-height: 0;
+}
+
+/* Stats counter animation */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Masonry grid */
+.masonry-grid {
+  columns: 3;
+  column-gap: 1rem;
+}
+@media (max-width: 768px) {
+  .masonry-grid {
+    columns: 2;
+  }
+}
+@media (max-width: 480px) {
+  .masonry-grid {
+    columns: 1;
+  }
+}
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+/* Logo carousel */
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.carousel-track {
+  animation: scroll 20s linear infinite;
+}
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+/* Floating label forms */
+.input-field {
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px 16px;
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: white;
+}
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-green);
+  box-shadow: 0 0 0 3px rgba(45, 125, 70, 0.1);
+}
+
+/* Tier cards */
+.tier-gold {
+  border: 2px solid var(--color-gold);
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+.tier-silver {
+  border: 2px solid #9ca3af;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+}
+.tier-bronze {
+  border: 2px solid #d97706;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%);
+}
+
+/* Text gradient */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-green) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Section fade animation */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Nav link underline effect */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-gold);
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Impact number glow */
+.impact-number {
+  text-shadow: 0 0 30px rgba(212, 160, 23, 0.3);
+}
