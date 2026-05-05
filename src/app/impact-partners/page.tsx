@@ -1,83 +1,129 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Download, BarChart2, FileText, TrendingUp, Award } from 'lucide-react';
+import { useState } from "react";
+import { Download, BarChart2, FileText, TrendingUp, Award } from "lucide-react";
 
 const sponsors = [
-  { name: 'Global Corp', logo: '🌐' },
-  { name: 'EcoTech Inc', logo: '🌿' },
-  { name: 'HumanFirst', logo: '❤️' },
-  { name: 'BrightFutures', logo: '⭐' },
-  { name: 'Unity Bank', logo: '🏦' },
-  { name: 'GreenEnergy', logo: '⚡' },
-  { name: 'WorldBridge', logo: '🌉' },
-  { name: 'CareGroup', logo: '🤝' },
-  { name: 'NovaTech', logo: '🚀' },
-  { name: 'PeaceWorks', logo: '🕊️' },
-  { name: 'AquaFund', logo: '💧' },
-  { name: 'LightPath', logo: '✨' },
+  { name: "Global Corp", logo: "🌐" },
+  { name: "EcoTech Inc", logo: "🌿" },
+  { name: "HumanFirst", logo: "❤️" },
+  { name: "BrightFutures", logo: "⭐" },
+  { name: "Unity Bank", logo: "🏦" },
+  { name: "GreenEnergy", logo: "⚡" },
+  { name: "WorldBridge", logo: "🌉" },
+  { name: "CareGroup", logo: "🤝" },
+  { name: "NovaTech", logo: "🚀" },
+  { name: "PeaceWorks", logo: "🕊️" },
+  { name: "AquaFund", logo: "💧" },
+  { name: "LightPath", logo: "✨" },
 ];
 
 const reports = [
   {
-    year: '2024',
-    title: 'Annual Impact Report 2024',
-    size: '4.2 MB',
-    highlight: '2.4M lives impacted across 140 countries',
+    year: "2024",
+    title: "Annual Impact Report 2024",
+    size: "4.2 MB",
+    highlight: "2.4M lives impacted across 140 countries",
     stats: [
-      { label: 'Total Beneficiaries', value: '2.4M', icon: '👥' },
-      { label: 'Funds Deployed', value: '$82M', icon: '💰' },
-      { label: 'Programs Active', value: '850', icon: '🎯' },
-      { label: 'Countries', value: '140+', icon: '🌍' },
+      { label: "Total Beneficiaries", value: "2.4M", icon: "👥" },
+      { label: "Funds Deployed", value: "$82M", icon: "💰" },
+      { label: "Programs Active", value: "850", icon: "🎯" },
+      { label: "Countries", value: "140+", icon: "🌍" },
     ],
   },
   {
-    year: '2023',
-    title: 'Annual Impact Report 2023',
-    size: '3.8 MB',
-    highlight: '1.9M lives impacted, 12 new programs launched',
+    year: "2023",
+    title: "Annual Impact Report 2023",
+    size: "3.8 MB",
+    highlight: "1.9M lives impacted, 12 new programs launched",
     stats: [
-      { label: 'Total Beneficiaries', value: '1.9M', icon: '👥' },
-      { label: 'Funds Deployed', value: '$71M', icon: '💰' },
-      { label: 'Programs Active', value: '720', icon: '🎯' },
-      { label: 'Countries', value: '128', icon: '🌍' },
+      { label: "Total Beneficiaries", value: "1.9M", icon: "👥" },
+      { label: "Funds Deployed", value: "$71M", icon: "💰" },
+      { label: "Programs Active", value: "720", icon: "🎯" },
+      { label: "Countries", value: "128", icon: "🌍" },
     ],
   },
   {
-    year: '2022',
-    title: 'Annual Impact Report 2022',
-    size: '3.5 MB',
-    highlight: 'Post-COVID recovery efforts & 1.5M beneficiaries',
+    year: "2022",
+    title: "Annual Impact Report 2022",
+    size: "3.5 MB",
+    highlight: "Post-COVID recovery efforts & 1.5M beneficiaries",
     stats: [
-      { label: 'Total Beneficiaries', value: '1.5M', icon: '👥' },
-      { label: 'Funds Deployed', value: '$58M', icon: '💰' },
-      { label: 'Programs Active', value: '610', icon: '🎯' },
-      { label: 'Countries', value: '110', icon: '🌍' },
+      { label: "Total Beneficiaries", value: "1.5M", icon: "👥" },
+      { label: "Funds Deployed", value: "$58M", icon: "💰" },
+      { label: "Programs Active", value: "610", icon: "🎯" },
+      { label: "Countries", value: "110", icon: "🌍" },
     ],
   },
 ];
 
 const galleryImages = [
-  { src: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80', alt: 'Community gathering', category: '2024', event: 'Annual Forum' },
-  { src: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80', alt: 'Education program', category: '2024', event: 'Schools Launch' },
-  { src: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&q=80', alt: 'Reforestation', category: '2023', event: 'Forest Drive' },
-  { src: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=600&q=80', alt: 'Volunteer team', category: '2024', event: 'Field Work' },
-  { src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80', alt: 'Women program', category: '2023', event: 'Women Rising' },
-  { src: 'https://images.unsplash.com/photo-1500916434205-0c77489c6cf7?w=600&q=80', alt: 'Water project', category: '2022', event: 'Water Access' },
-  { src: 'https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=600&q=80', alt: 'Students', category: '2023', event: 'Education' },
-  { src: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&q=80', alt: 'Community build', category: '2024', event: 'Build-a-Thon' },
-  { src: 'https://images.unsplash.com/photo-1541544537156-7627a7a4aa1c?w=600&q=80', alt: 'Clean water', category: '2022', event: 'Water Drive' },
+  {
+    src: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80",
+    alt: "Community gathering",
+    category: "2024",
+    event: "Annual Forum",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80",
+    alt: "Education program",
+    category: "2024",
+    event: "Schools Launch",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&q=80",
+    alt: "Reforestation",
+    category: "2023",
+    event: "Forest Drive",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=600&q=80",
+    alt: "Volunteer team",
+    category: "2024",
+    event: "Field Work",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80",
+    alt: "Women program",
+    category: "2023",
+    event: "Women Rising",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1500916434205-0c77489c6cf7?w=600&q=80",
+    alt: "Water project",
+    category: "2022",
+    event: "Water Access",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=600&q=80",
+    alt: "Students",
+    category: "2023",
+    event: "Education",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&q=80",
+    alt: "Community build",
+    category: "2024",
+    event: "Build-a-Thon",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1541544537156-7627a7a4aa1c?w=600&q=80",
+    alt: "Clean water",
+    category: "2022",
+    event: "Water Drive",
+  },
 ];
 
-const years = ['All', '2024', '2023', '2022'];
+const years = ["All", "2024", "2023", "2022"];
 
 export default function ImpactPartnersPage() {
-  const [activeYear, setActiveYear] = useState('All');
-  const [expandedReport, setExpandedReport] = useState<string | null>('2024');
+  const [activeYear, setActiveYear] = useState("All");
+  const [expandedReport, setExpandedReport] = useState<string | null>("2024");
 
-  const filteredImages = activeYear === 'All'
-    ? galleryImages
-    : galleryImages.filter(img => img.category === activeYear);
+  const filteredImages =
+    activeYear === "All"
+      ? galleryImages
+      : galleryImages.filter((img) => img.category === activeYear);
 
   return (
     <div className="pt-20">
@@ -85,13 +131,20 @@ export default function ImpactPartnersPage() {
       <section className="relative py-24 bg-green-900 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=80')` }}
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=80')`,
+          }}
         />
         <div className="relative max-w-4xl mx-auto px-4 text-center text-white">
-          <p className="text-yellow-400 uppercase tracking-widest text-sm font-medium mb-4">Transparency & Proof</p>
-          <h1 className="font-display text-5xl sm:text-6xl font-bold mb-6">Impact & Partners</h1>
+          <p className="text-yellow-400 uppercase tracking-widest text-sm font-medium mb-4">
+            Transparency & Proof
+          </p>
+          <h1 className="font-display text-5xl sm:text-6xl font-bold mb-6">
+            Impact & Partners
+          </h1>
           <p className="text-green-200 text-xl max-w-2xl mx-auto leading-relaxed">
-            See the data behind our work, meet our partners, and explore stories from the field.
+            See the data behind our work, meet our partners, and explore stories
+            from the field.
           </p>
         </div>
       </section>
@@ -100,8 +153,12 @@ export default function ImpactPartnersPage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <p className="text-yellow-600 uppercase tracking-widest text-sm font-semibold mb-3">Our Community</p>
-            <h2 className="font-display text-4xl font-bold text-green-900">Partners & Supporters</h2>
+            <p className="text-yellow-600 uppercase tracking-widest text-sm font-semibold mb-3">
+              Our Community
+            </p>
+            <h2 className="font-display text-4xl font-bold text-green-900">
+              Partners & Supporters
+            </h2>
           </div>
 
           {/* Carousel */}
@@ -112,8 +169,12 @@ export default function ImpactPartnersPage() {
                   key={i}
                   className="flex-shrink-0 flex flex-col items-center justify-center w-40 h-24 rounded-2xl border-2 border-gray-100 bg-gray-50 hover:border-yellow-400 hover:bg-amber-50 transition-all cursor-pointer group"
                 >
-                  <div className="text-3xl mb-1 group-hover:scale-110 transition-transform">{logo}</div>
-                  <span className="text-xs font-semibold text-gray-600 group-hover:text-green-800">{name}</span>
+                  <div className="text-3xl mb-1 group-hover:scale-110 transition-transform">
+                    {logo}
+                  </div>
+                  <span className="text-xs font-semibold text-gray-600 group-hover:text-green-800">
+                    {name}
+                  </span>
                 </div>
               ))}
             </div>
@@ -126,8 +187,12 @@ export default function ImpactPartnersPage() {
                 key={name}
                 className="flex flex-col items-center justify-center p-4 rounded-2xl bg-amber-50 hover:bg-yellow-100 border border-amber-100 hover:border-yellow-300 transition-all card-hover group"
               >
-                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">{logo}</div>
-                <span className="text-xs text-gray-600 font-medium text-center">{name}</span>
+                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">
+                  {logo}
+                </div>
+                <span className="text-xs text-gray-600 font-medium text-center">
+                  {name}
+                </span>
               </div>
             ))}
           </div>
@@ -138,17 +203,29 @@ export default function ImpactPartnersPage() {
       <section className="py-20 bg-amber-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <p className="text-yellow-600 uppercase tracking-widest text-sm font-semibold mb-3">Accountability</p>
-            <h2 className="font-display text-4xl font-bold text-green-900">Impact Reports</h2>
+            <p className="text-yellow-600 uppercase tracking-widest text-sm font-semibold mb-3">
+              Accountability
+            </p>
+            <h2 className="font-display text-4xl font-bold text-green-900">
+              Impact Reports
+            </h2>
             <p className="text-gray-600 mt-3 max-w-xl mx-auto">
-              Every year we publish a comprehensive report detailing exactly how donations are used and lives are changed.
+              Every year we publish a comprehensive report detailing exactly how
+              donations are used and lives are changed.
             </p>
           </div>
           <div className="space-y-5">
             {reports.map((report) => (
-              <div key={report.year} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+              <div
+                key={report.year}
+                className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100"
+              >
                 <button
-                  onClick={() => setExpandedReport(expandedReport === report.year ? null : report.year)}
+                  onClick={() =>
+                    setExpandedReport(
+                      expandedReport === report.year ? null : report.year,
+                    )
+                  }
                   className="w-full flex items-center justify-between p-6 hover:bg-amber-50 transition-colors"
                 >
                   <div className="flex items-center gap-4">
@@ -156,8 +233,12 @@ export default function ImpactPartnersPage() {
                       <FileText size={22} className="text-yellow-600" />
                     </div>
                     <div className="text-left">
-                      <h3 className="font-display font-bold text-xl text-green-900">{report.title}</h3>
-                      <p className="text-gray-500 text-sm">{report.highlight}</p>
+                      <h3 className="font-display font-bold text-xl text-green-900">
+                        {report.title}
+                      </h3>
+                      <p className="text-gray-500 text-sm">
+                        {report.highlight}
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -176,10 +257,17 @@ export default function ImpactPartnersPage() {
                   <div className="px-6 pb-6">
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-2">
                       {report.stats.map(({ label, value, icon }) => (
-                        <div key={label} className="bg-amber-50 rounded-xl p-4 text-center">
+                        <div
+                          key={label}
+                          className="bg-amber-50 rounded-xl p-4 text-center"
+                        >
                           <div className="text-2xl mb-1">{icon}</div>
-                          <div className="font-display text-2xl font-bold text-green-900">{value}</div>
-                          <div className="text-xs text-gray-600 font-medium">{label}</div>
+                          <div className="font-display text-2xl font-bold text-green-900">
+                            {value}
+                          </div>
+                          <div className="text-xs text-gray-600 font-medium">
+                            {label}
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -187,24 +275,30 @@ export default function ImpactPartnersPage() {
                     <div className="mt-6 bg-green-900 rounded-xl p-6 text-white">
                       <div className="flex items-center gap-2 mb-5">
                         <BarChart2 size={18} className="text-yellow-400" />
-                        <h4 className="font-display font-semibold text-yellow-400">Fund Allocation {report.year}</h4>
+                        <h4 className="font-display font-semibold text-yellow-400">
+                          Fund Allocation {report.year}
+                        </h4>
                       </div>
                       <div className="space-y-3">
                         {[
-                          { label: 'Program Delivery', pct: 78 },
-                          { label: 'Field Operations', pct: 12 },
-                          { label: 'Admin & Governance', pct: 5 },
-                          { label: 'Fundraising', pct: 5 },
+                          { label: "Program Delivery", pct: 78 },
+                          { label: "Field Operations", pct: 12 },
+                          { label: "Admin & Governance", pct: 5 },
+                          { label: "Fundraising", pct: 5 },
                         ].map(({ label, pct }) => (
                           <div key={label} className="flex items-center gap-3">
-                            <span className="text-green-200 text-xs w-36 flex-shrink-0">{label}</span>
+                            <span className="text-green-200 text-xs w-36 flex-shrink-0">
+                              {label}
+                            </span>
                             <div className="flex-1 bg-white/10 rounded-full h-3 overflow-hidden">
                               <div
                                 className="h-full rounded-full bg-gradient-to-r from-yellow-400 to-green-400"
                                 style={{ width: `${pct}%` }}
                               />
                             </div>
-                            <span className="text-yellow-400 text-xs font-bold w-8">{pct}%</span>
+                            <span className="text-yellow-400 text-xs font-bold w-8">
+                              {pct}%
+                            </span>
                           </div>
                         ))}
                       </div>
@@ -221,8 +315,12 @@ export default function ImpactPartnersPage() {
       <section id="gallery" className="py-20 bg-white scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <p className="text-yellow-600 uppercase tracking-widest text-sm font-semibold mb-3">From the Field</p>
-            <h2 className="font-display text-4xl font-bold text-green-900 mb-5">Photo Gallery</h2>
+            <p className="text-yellow-600 uppercase tracking-widest text-sm font-semibold mb-3">
+              From the Field
+            </p>
+            <h2 className="font-display text-4xl font-bold text-green-900 mb-5">
+              Photo Gallery
+            </h2>
             {/* Year filter */}
             <div className="flex flex-wrap justify-center gap-3">
               {years.map((year) => (
@@ -231,8 +329,8 @@ export default function ImpactPartnersPage() {
                   onClick={() => setActiveYear(year)}
                   className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
                     activeYear === year
-                      ? 'bg-yellow-400 text-green-900 shadow-md'
-                      : 'bg-gray-100 text-gray-600 hover:bg-amber-100'
+                      ? "bg-yellow-400 text-green-900 shadow-md"
+                      : "bg-gray-100 text-gray-600 hover:bg-amber-100"
                   }`}
                 >
                   {year}
@@ -250,36 +348,19 @@ export default function ImpactPartnersPage() {
                   src={src}
                   alt={alt}
                   className="w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  style={{ height: i % 3 === 0 ? '300px' : i % 3 === 1 ? '220px' : '260px' }}
+                  style={{
+                    height:
+                      i % 3 === 0 ? "300px" : i % 3 === 1 ? "220px" : "260px",
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-green-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                   <div>
-                    <span className="bg-yellow-400 text-green-900 text-xs font-bold px-2 py-0.5 rounded-full">{category}</span>
+                    <span className="bg-yellow-400 text-green-900 text-xs font-bold px-2 py-0.5 rounded-full">
+                      {category}
+                    </span>
                     <p className="text-white font-semibold mt-1">{event}</p>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Awards */}
-      <section className="py-16 bg-green-900 text-white">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="text-center mb-10">
-            <h2 className="font-display text-3xl font-bold text-yellow-400">Recognized for Excellence</h2>
-          </div>
-          <div className="grid sm:grid-cols-3 gap-6">
-            {[
-              { award: 'UN SDG Champion 2023', org: 'United Nations', icon: '🏆' },
-              { award: 'Best Impact Organization', org: 'Global NGO Awards', icon: '⭐' },
-              { award: 'Transparency Excellence', org: 'Charity Navigator', icon: '🔍' },
-            ].map(({ award, org, icon }) => (
-              <div key={award} className="text-center p-6 rounded-2xl border border-white/10 hover:bg-white/5 transition-colors">
-                <div className="text-4xl mb-3">{icon}</div>
-                <h3 className="font-display font-bold text-yellow-400 mb-1">{award}</h3>
-                <p className="text-green-300 text-sm">{org}</p>
               </div>
             ))}
           </div>

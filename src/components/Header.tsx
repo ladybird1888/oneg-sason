@@ -1,16 +1,17 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { Menu, X, Heart, Users } from 'lucide-react';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Menu, X, Heart, Users } from "lucide-react";
+import Image from "next/image";
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About Us' },
-  { href: '/our-work', label: 'Our Work' },
-  { href: '/get-involved', label: 'Get Involved' },
-  { href: '/impact-partners', label: 'Impact & Partners' },
-  { href: '/contact', label: 'Contact' },
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About Us" },
+  { href: "/our-work", label: "Our Work" },
+  { href: "/get-involved", label: "Get Involved" },
+  { href: "/impact-partners", label: "Impact & Partners" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Header() {
@@ -19,41 +20,23 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-lg py-3'
-          : 'bg-transparent py-5'
+          ? "bg-white/95 backdrop-blur-md shadow-lg py-3"
+          : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-green-600 flex items-center justify-center shadow-md">
-              <span className="text-white font-bold text-lg font-display">G</span>
-            </div>
-            <div>
-              <span
-                className={`font-display font-bold text-xl leading-none block transition-colors duration-300 ${
-                  scrolled ? 'text-green-800' : 'text-white'
-                }`}
-              >
-                GlobalRoots
-              </span>
-              <span
-                className={`text-xs uppercase tracking-widest transition-colors duration-300 ${
-                  scrolled ? 'text-yellow-600' : 'text-yellow-300'
-                }`}
-              >
-                Foundation
-              </span>
-            </div>
+            <Image src="/images/logo.jpeg" alt="" width={100} height={10} />
           </Link>
 
           {/* Desktop Navigation */}
@@ -64,8 +47,8 @@ export default function Header() {
                 href={link.href}
                 className={`relative px-3 py-2 text-sm font-medium nav-link transition-colors duration-200 ${
                   scrolled
-                    ? 'text-gray-700 hover:text-green-700'
-                    : 'text-white/90 hover:text-yellow-300'
+                    ? "text-gray-700 hover:text-green-700"
+                    : "text-white/90 hover:text-yellow-300"
                 }`}
               >
                 {link.label}
@@ -79,8 +62,8 @@ export default function Header() {
               href="/get-involved#volunteer"
               className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border ${
                 scrolled
-                  ? 'border-green-600 text-green-700 hover:bg-green-50'
-                  : 'border-white/60 text-white hover:bg-white/10'
+                  ? "border-green-600 text-green-700 hover:bg-green-50"
+                  : "border-white/60 text-white hover:bg-white/10"
               }`}
             >
               <Users size={15} />
@@ -99,7 +82,7 @@ export default function Header() {
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className={`lg:hidden p-2 rounded-lg transition-colors ${
-              scrolled ? 'text-gray-700' : 'text-white'
+              scrolled ? "text-gray-700" : "text-white"
             }`}
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}

@@ -1,18 +1,29 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useState } from 'react';
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube, ArrowRight, Heart } from 'lucide-react';
+import Link from "next/link";
+import { useState } from "react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Youtube,
+  ArrowRight,
+  Heart,
+} from "lucide-react";
 
 export default function Footer() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
       setSubscribed(true);
-      setEmail('');
+      setEmail("");
     }
   };
 
@@ -42,7 +53,10 @@ export default function Footer() {
                 Thank you for subscribing!
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="flex gap-2 w-full md:w-auto">
+              <form
+                onSubmit={handleSubscribe}
+                className="flex gap-2 w-full md:w-auto"
+              >
                 <input
                   type="email"
                   value={email}
@@ -68,23 +82,30 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-green-500 flex items-center justify-center">
-                <span className="text-white font-bold text-lg font-display">G</span>
+                <span className="text-white font-bold text-lg font-display">
+                  G
+                </span>
               </div>
               <div>
-                <span className="font-display font-bold text-xl text-white block">GlobalRoots</span>
-                <span className="text-yellow-400 text-xs uppercase tracking-widest">Foundation</span>
+                <span className="font-display font-bold text-xl text-white block">
+                  GlobalRoots
+                </span>
+                <span className="text-yellow-400 text-xs uppercase tracking-widest">
+                  Foundation
+                </span>
               </div>
             </Link>
             <p className="text-green-200 text-sm leading-relaxed mb-5">
-              Empowering communities worldwide through education, sustainability, and human dignity since 2005.
+              Empowering communities worldwide through education,
+              sustainability, and human dignity since 2005.
             </p>
             <div className="flex gap-3">
               {[
-                { Icon: Facebook, href: '#' },
-                { Icon: Twitter, href: '#' },
-                { Icon: Instagram, href: '#' },
-                { Icon: Linkedin, href: '#' },
-                { Icon: Youtube, href: '#' },
+                { Icon: Facebook, href: "#" },
+                { Icon: Twitter, href: "#" },
+                { Icon: Instagram, href: "#" },
+                { Icon: Linkedin, href: "#" },
+                { Icon: Youtube, href: "#" },
               ].map(({ Icon, href }, i) => (
                 <a
                   key={i}
@@ -99,22 +120,27 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-display font-semibold text-yellow-400 mb-5 text-lg">Quick Links</h4>
+            <h4 className="font-display font-semibold text-yellow-400 mb-5 text-lg">
+              Quick Links
+            </h4>
             <ul className="space-y-3">
               {[
-                { href: '/', label: 'Home' },
-                { href: '/about', label: 'About Us' },
-                { href: '/our-work', label: 'Our Work' },
-                { href: '/get-involved', label: 'Get Involved' },
-                { href: '/impact-partners', label: 'Impact & Partners' },
-                { href: '/contact', label: 'Contact' },
+                { href: "/", label: "Home" },
+                { href: "/about", label: "About Us" },
+                { href: "/our-work", label: "Our Work" },
+                { href: "/get-involved", label: "Get Involved" },
+                { href: "/impact-partners", label: "Impact & Partners" },
+                { href: "/contact", label: "Contact" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     className="text-green-200 hover:text-yellow-400 text-sm transition-colors flex items-center gap-2 group"
                   >
-                    <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all duration-200" />
+                    <ArrowRight
+                      size={12}
+                      className="opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all duration-200"
+                    />
                     {link.label}
                   </Link>
                 </li>
@@ -124,22 +150,27 @@ export default function Footer() {
 
           {/* Get Involved */}
           <div>
-            <h4 className="font-display font-semibold text-yellow-400 mb-5 text-lg">Get Involved</h4>
+            <h4 className="font-display font-semibold text-yellow-400 mb-5 text-lg">
+              Get Involved
+            </h4>
             <ul className="space-y-3">
               {[
-                { href: '/get-involved#donate', label: 'Donate Now' },
-                { href: '/get-involved#volunteer', label: 'Volunteer' },
-                { href: '/get-involved#partnership', label: 'Partner With Us' },
-                { href: '/get-involved#sponsor', label: 'Sponsorship' },
-                { href: '/impact-partners', label: 'Impact Reports' },
-                { href: '/impact-partners#gallery', label: 'Photo Gallery' },
+                { href: "/get-involved#donate", label: "Donate Now" },
+                { href: "/get-involved#volunteer", label: "Volunteer" },
+                { href: "/get-involved#partnership", label: "Partner With Us" },
+                { href: "/get-involved#sponsor", label: "Sponsorship" },
+                { href: "/impact-partners", label: "Impact Reports" },
+                { href: "/impact-partners#gallery", label: "Photo Gallery" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     className="text-green-200 hover:text-yellow-400 text-sm transition-colors flex items-center gap-2 group"
                   >
-                    <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all duration-200" />
+                    <ArrowRight
+                      size={12}
+                      className="opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all duration-200"
+                    />
                     {link.label}
                   </Link>
                 </li>
@@ -149,36 +180,49 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-display font-semibold text-yellow-400 mb-5 text-lg">Contact Us</h4>
+            <h4 className="font-display font-semibold text-yellow-400 mb-5 text-lg">
+              Contact Us
+            </h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-green-200 text-sm">
-                <MapPin size={16} className="text-yellow-400 flex-shrink-0 mt-0.5" />
-                <span>123 Foundation Way, Geneva, Switzerland CH-1200</span>
+                <MapPin
+                  size={16}
+                  className="text-yellow-400 flex-shrink-0 mt-0.5"
+                />
+                <span>
+                  49 Lambe Street Off Ago Palace Way Okota Isolo Lagos
+                </span>
               </li>
               <li className="flex items-center gap-3 text-green-200 text-sm">
                 <Phone size={16} className="text-yellow-400 flex-shrink-0" />
-                <span>+41 22 123 4567</span>
+                <span>+234 704 100 6613</span>
               </li>
               <li className="flex items-center gap-3 text-green-200 text-sm">
                 <Mail size={16} className="text-yellow-400 flex-shrink-0" />
-                <span>hello@globalroots.org</span>
+                <span>info@onegsason.org</span>
               </li>
             </ul>
-            <div className="mt-6">
-              <p className="text-xs text-green-400 uppercase tracking-widest mb-2">Registered Charity</p>
+            {/* <div className="mt-6">
+              <p className="text-xs text-green-400 uppercase tracking-widest mb-2">
+                Registered Charity
+              </p>
               <p className="text-green-200 text-sm">Reg. No: CHE-123.456.789</p>
-            </div>
+            </div> */}
           </div>
         </div>
 
         {/* Bottom bar */}
         <div className="py-5 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-green-400 text-xs">
-            © 2024 GlobalRoots Foundation. All rights reserved.
+            © 2022 Oneg Sason . All rights reserved.
           </p>
           <div className="flex gap-5">
-            {['Privacy Policy', 'Terms of Use', 'Cookie Policy'].map((item) => (
-              <a key={item} href="#" className="text-green-400 hover:text-yellow-400 text-xs transition-colors">
+            {["Privacy Policy", "Terms of Use", "Cookie Policy"].map((item) => (
+              <a
+                key={item}
+                href="#"
+                className="text-green-400 hover:text-yellow-400 text-xs transition-colors"
+              >
                 {item}
               </a>
             ))}
