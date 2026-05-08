@@ -97,7 +97,7 @@ export default function AboutPage() {
         />
         <div className="relative max-w-4xl mx-auto px-4 text-center text-white">
           <p className="text-yellow-400 uppercase tracking-widest text-sm font-medium mb-4">
-            About GlobalRoots
+            About Oneg Sason Empowerment Foundation
           </p>
           <h1 className="font-display text-5xl sm:text-6xl font-bold mb-6">
             Who We Are

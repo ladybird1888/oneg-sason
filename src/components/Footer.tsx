@@ -6,7 +6,6 @@ import {
   Mail,
   Phone,
   MapPin,
-  Facebook,
   Twitter,
   Instagram,
   Linkedin,
@@ -14,6 +13,7 @@ import {
   ArrowRight,
   Heart,
 } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -81,27 +81,14 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-green-500 flex items-center justify-center">
-                <span className="text-white font-bold text-lg font-display">
-                  G
-                </span>
-              </div>
-              <div>
-                <span className="font-display font-bold text-xl text-white block">
-                  GlobalRoots
-                </span>
-                <span className="text-yellow-400 text-xs uppercase tracking-widest">
-                  Foundation
-                </span>
-              </div>
+              <Image src="/images/logo.jpeg" alt="" width={100} height={10} />
             </Link>
             <p className="text-green-200 text-sm leading-relaxed mb-5">
               Empowering communities worldwide through education,
-              sustainability, and human dignity since 2005.
+              sustainability, and human dignity since 2020.
             </p>
             <div className="flex gap-3">
               {[
-                { Icon: Facebook, href: "#" },
                 { Icon: Twitter, href: "#" },
                 { Icon: Instagram, href: "#" },
                 { Icon: Linkedin, href: "#" },
@@ -214,7 +201,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="py-5 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-green-400 text-xs">
-            © 2022 Oneg Sason . All rights reserved.
+            © {new Date().getFullYear()} Oneg Sason . All rights reserved.
           </p>
           <div className="flex gap-5">
             {["Privacy Policy", "Terms of Use", "Cookie Policy"].map((item) => (

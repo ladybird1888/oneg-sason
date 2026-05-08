@@ -1,4 +1,4 @@
-# 🌿 GlobalRoots Foundation — Next.js Website
+# 🌿 Oneg Sason Empowerment Foundation — Next.js Website
 
 A modern, responsive, multi-page website for a global non-profit foundation. Built with **Next.js 14 App Router**, **Tailwind CSS**, and **TypeScript**.
 
@@ -18,6 +18,7 @@ npm run dev
 ```
 
 ### Production Build
+
 ```bash
 npm run build
 npm run start
@@ -56,21 +57,24 @@ src/
 ## 🎨 Design System
 
 ### Color Palette
-| Token | Hex | Usage |
-|-------|-----|-------|
-| Gold | `#D4A017` | Primary CTA buttons, accents |
-| Gold Light | `#F5C842` | Hover states, highlights |
-| Forest Green | `#2D7D46` | Secondary buttons, headers |
-| Green Light | `#4CAF72` | Hover states |
-| Yellow | `#FFD700` | Hero accents, badges |
-| Cream | `#FFFDF5` | Page backgrounds |
-| Dark Green | `#1A2E1A` | Body text |
+
+| Token        | Hex       | Usage                        |
+| ------------ | --------- | ---------------------------- |
+| Gold         | `#D4A017` | Primary CTA buttons, accents |
+| Gold Light   | `#F5C842` | Hover states, highlights     |
+| Forest Green | `#2D7D46` | Secondary buttons, headers   |
+| Green Light  | `#4CAF72` | Hover states                 |
+| Yellow       | `#FFD700` | Hero accents, badges         |
+| Cream        | `#FFFDF5` | Page backgrounds             |
+| Dark Green   | `#1A2E1A` | Body text                    |
 
 ### Typography
+
 - **Display**: Playfair Display (headings, hero text, section titles)
 - **Body**: DM Sans (paragraphs, labels, navigation)
 
 ### CSS Utility Classes
+
 ```css
 .btn-gold        /* Gold shimmer gradient button */
 .btn-green       /* Forest green gradient button */
@@ -89,6 +93,7 @@ src/
 ## 📄 Pages
 
 ### 🏠 Home (`/`)
+
 - Full-screen hero with animated CTA
 - Animated impact counter (2.4M lives, 140+ countries, 850+ programs, 35K volunteers)
 - About teaser with offset image layout
@@ -101,6 +106,7 @@ src/
 - Sticky Donate Bar (appears after 600px scroll)
 
 ### 👥 About (`/about`)
+
 - Hero with overlay
 - Founder story with image + decorative badges
 - Vision card (dark) + Mission card (gold) side-by-side
@@ -109,12 +115,14 @@ src/
 - Team section with hover photo cards
 
 ### 🌍 Our Work (`/our-work`)
+
 - Hero
 - 6 full program cards (Environment, Education, Water, Women, Health, Agriculture)
   - Each: image, category badge, region, description, 3 impact stats, CTA
 - 3-column "Our Approach" section
 
 ### 🤝 Get Involved (`/get-involved`)
+
 - Quick-nav anchor buttons
 - **Donate**: One-time/monthly toggle, 6 preset amounts, custom input, dynamic impact calculator, Donate button
 - **Volunteer**: Full sign-up form with interest checkboxes, availability selector
@@ -122,6 +130,7 @@ src/
 - **Sponsorship Tiers**: Gold ($50K+), Silver ($25K+), Bronze ($10K+) — each with full benefits list
 
 ### 📊 Impact & Partners (`/impact-partners`)
+
 - Auto-scrolling logo carousel (12 partners)
 - Static partner grid
 - 3 expandable Annual Impact Reports (2022–2024) with fund allocation bar charts
@@ -129,6 +138,7 @@ src/
 - Awards section
 
 ### 📬 Contact (`/contact`)
+
 - Contact form with subject dropdown + privacy checkbox
 - Contact info sidebar with social links
 - Map placeholder (links to Google Maps)
@@ -140,20 +150,25 @@ src/
 ## ⚙️ Customisation Guide
 
 ### Changing Foundation Name & Branding
+
 1. Update name in `src/app/layout.tsx` (metadata)
 2. Update logo/name in `src/components/Header.tsx` and `Footer.tsx`
 
 ### Updating Impact Numbers
+
 Edit the `impactStats` array in `src/app/page.tsx`:
+
 ```tsx
 const impactStats = [
-  { number: 2400000, suffix: '+', label: 'Lives Impacted', icon: Heart },
+  { number: 2400000, suffix: "+", label: "Lives Impacted", icon: Heart },
   // ...
 ];
 ```
 
 ### Adding a New Program
+
 Add to the `programs` array in `src/app/our-work/page.tsx`:
+
 ```tsx
 {
   emoji: '🏥',
@@ -168,16 +183,21 @@ Add to the `programs` array in `src/app/our-work/page.tsx`:
 ```
 
 ### Adding Partners/Sponsors to the Wall
+
 Edit the `sponsors` array in `src/app/impact-partners/page.tsx`.
 
 ### Adding Gallery Images
+
 Edit the `galleryImages` array in `src/app/impact-partners/page.tsx`:
+
 ```tsx
 { src: 'YOUR_IMAGE_URL', alt: 'Description', category: '2024', event: 'Event Name' }
 ```
 
 ### Connecting a Real Payment Gateway
+
 In `src/app/get-involved/page.tsx`, replace the `alert()` in the donate button's `onClick` with your Stripe/PayPal integration:
+
 ```tsx
 onClick={() => {
   // Stripe example:
@@ -186,7 +206,9 @@ onClick={() => {
 ```
 
 ### Adding Google Maps Embed
+
 Replace the map placeholder in `src/app/contact/page.tsx` with:
+
 ```tsx
 <iframe
   src="https://www.google.com/maps/embed?pb=YOUR_EMBED_URL"
@@ -198,11 +220,16 @@ Replace the map placeholder in `src/app/contact/page.tsx` with:
 ```
 
 ### Enabling Newsletter (e.g. Mailchimp)
+
 In `src/components/Footer.tsx`, update `handleSubscribe`:
+
 ```tsx
 const handleSubscribe = async (e) => {
   e.preventDefault();
-  await fetch('/api/subscribe', { method: 'POST', body: JSON.stringify({ email }) });
+  await fetch("/api/subscribe", {
+    method: "POST",
+    body: JSON.stringify({ email }),
+  });
   setSubscribed(true);
 };
 ```
@@ -211,32 +238,35 @@ const handleSubscribe = async (e) => {
 
 ## 📦 Dependencies
 
-| Package | Version | Purpose |
-|---------|---------|---------|
-| next | 14.2.5 | Framework |
-| react | ^18 | UI library |
-| react-dom | ^18 | DOM rendering |
-| lucide-react | ^0.383.0 | Icon set |
-| tailwindcss | ^3.4.1 | Utility CSS |
-| typescript | ^5 | Type safety |
+| Package      | Version  | Purpose       |
+| ------------ | -------- | ------------- |
+| next         | 14.2.5   | Framework     |
+| react        | ^18      | UI library    |
+| react-dom    | ^18      | DOM rendering |
+| lucide-react | ^0.383.0 | Icon set      |
+| tailwindcss  | ^3.4.1   | Utility CSS   |
+| typescript   | ^5       | Type safety   |
 
 ---
 
 ## 🌐 Deployment
 
 ### Vercel (Recommended)
+
 ```bash
 npm install -g vercel
 vercel --prod
 ```
 
 ### Netlify
+
 ```bash
 npm run build
 # Deploy the .next folder or connect GitHub repo
 ```
 
 ### Docker
+
 ```dockerfile
 FROM node:20-alpine
 WORKDIR /app

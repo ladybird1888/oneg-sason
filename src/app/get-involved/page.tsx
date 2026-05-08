@@ -109,8 +109,8 @@ export default function GetInvolvedPage() {
             Get Involved
           </h1>
           <p className="text-green-200 text-xl max-w-2xl mx-auto leading-relaxed">
-            There are many ways to join the GlobalRoots family — choose the path
-            that resonates with you.
+            There are many ways to join the Oneg Sason Empowerment Foundation
+            family — choose the path that resonates with you.
           </p>
           {/* Quick nav */}
           <div className="flex flex-wrap justify-center gap-3 mt-10">
@@ -498,7 +498,7 @@ export default function GetInvolvedPage() {
                     rows={5}
                     required
                     className="input-field resize-none"
-                    placeholder="Describe your organization's goals and how you envision partnering with GlobalRoots..."
+                    placeholder="Describe your organization's goals and how you envision partnering with Oneg Sason Empowerment Foundation..."
                   />
                 </div>
                 <button

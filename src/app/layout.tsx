@@ -5,11 +5,11 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: {
-    default: "GlobalRoots Foundation | Building a Better World Together",
-    template: "%s | GlobalRoots Foundation",
+    default: "Oneg Sason Empowerment Foundation | Empowerment through hope",
+    template: "%s | Oneg Sason Empowerment Foundation",
   },
   description:
-    "A global foundation dedicated to community development, environmental sustainability, and human empowerment across 140+ countries since 2005.",
+    "A Oneg Sason Empowerment Foundation dedicated to community development, environmental sustainability, and human empowerment.",
   keywords: [
     "foundation",
     "non-profit",
@@ -17,12 +17,12 @@ export const metadata: Metadata = {
     "community development",
     "sustainability",
     "education",
-    "clean water",
+    "healthcare",
     "volunteer",
   ],
   openGraph: {
     type: "website",
-    siteName: "GlobalRoots Foundation",
+    siteName: "Oneg Sason Empowerment Foundation",
     images: [
       {
         url: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=80",

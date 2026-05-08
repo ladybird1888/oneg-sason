@@ -2,18 +2,28 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
 export async function POST(req: NextRequest) {
-  const resend = new Resend(process.env.RESEND_API_KEY);
-  const { firstName, lastName, email, subject, message } = await req.json();
-
-  if (!firstName || !lastName || !email || !subject || !message) {
-    return NextResponse.json({ error: "All fields are required." }, { status: 400 });
+  let body: Record<string, string>;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const toEmail = process.env.CONTACT_FORM_TO_EMAIL!;
+  const { firstName, lastName, email, subject, message } = body;
+
+  if (!firstName || !lastName || !email || !subject || !message) {
+    return NextResponse.json(
+      { error: "All fields are required." },
+      { status: 400 },
+    );
+  }
 
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const toEmail = process.env.CONTACT_FORM_TO_EMAIL!;
+
     await resend.emails.send({
-      from: `GlobalRoots Contact Form <onboarding@resend.dev>`,
+      from: `Oneg Sason Empowerment Foundation Contact Form <onboarding@resend.dev>`,
       to: toEmail,
       replyTo: email,
       subject: `[Contact Form] ${subject}`,
@@ -29,7 +39,8 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : "Failed to send message.";
+    const message =
+      err instanceof Error ? err.message : "Failed to send message.";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

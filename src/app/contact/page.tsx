@@ -6,7 +6,6 @@ import {
   Phone,
   MapPin,
   Clock,
-  Facebook,
   Twitter,
   Instagram,
   Linkedin,
@@ -14,68 +13,6 @@ import {
   Send,
   CheckCircle,
 } from "lucide-react";
-
-const offices = [
-  {
-    city: "Geneva",
-    country: "Switzerland",
-    flag: "🇨🇭",
-    address: "123 Foundation Way, Geneva, CH-1200",
-    phone: "+41 22 123 4567",
-    email: "europe@globalroots.org",
-    type: "Global Headquarters",
-    hours: "Mon–Fri: 9:00–18:00 CET",
-  },
-  {
-    city: "Nairobi",
-    country: "Kenya",
-    flag: "🇰🇪",
-    address: "45 Uhuru Highway, Westlands, Nairobi",
-    phone: "+254 20 123 4567",
-    email: "africa@globalroots.org",
-    type: "Africa Regional Office",
-    hours: "Mon–Fri: 8:00–17:00 EAT",
-  },
-  {
-    city: "New York",
-    country: "USA",
-    flag: "🇺🇸",
-    address: "250 Park Avenue, New York, NY 10177",
-    phone: "+1 212 123 4567",
-    email: "americas@globalroots.org",
-    type: "Americas Office",
-    hours: "Mon–Fri: 9:00–18:00 EST",
-  },
-  {
-    city: "Bangkok",
-    country: "Thailand",
-    flag: "🇹🇭",
-    address: "88 Sukhumvit Road, Bangkok 10110",
-    phone: "+66 2 123 4567",
-    email: "asia@globalroots.org",
-    type: "Asia Pacific Office",
-    hours: "Mon–Fri: 9:00–18:00 ICT",
-  },
-];
-
-const faqs = [
-  {
-    q: "How can I track how my donation is used?",
-    a: "We publish annual impact reports and provide quarterly donor updates. Donors above $1,000 receive personalized impact statements.",
-  },
-  {
-    q: "Are donations tax-deductible?",
-    a: "Yes, GlobalRoots Foundation is a registered charitable organization in Switzerland, the USA, and Kenya. Tax receipts are issued automatically.",
-  },
-  {
-    q: "How do I apply for a grant or program funding?",
-    a: "Visit our Programs page and submit an inquiry through the Partnership form. Our grants team reviews applications quarterly.",
-  },
-  {
-    q: "Can I designate my donation to a specific program?",
-    a: "Yes! You can specify a program during donation checkout, and we will direct 100% of designated funds to that initiative.",
-  },
-];
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -276,7 +213,7 @@ export default function ContactPage() {
                       className="mt-1 w-4 h-4 accent-green-600"
                     />
                     <span className="text-sm text-gray-600">
-                      I agree to GlobalRoots Foundation's{" "}
+                      I agree to Oneg Sason Empowerment Foundation's{" "}
                       <a href="#" className="text-green-700 underline">
                         Privacy Policy
                       </a>
@@ -363,11 +300,6 @@ export default function ContactPage() {
                 </h3>
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    {
-                      Icon: Facebook,
-                      label: "Facebook",
-                      color: "hover:bg-blue-600",
-                    },
                     {
                       Icon: Twitter,
                       label: "Twitter / X",

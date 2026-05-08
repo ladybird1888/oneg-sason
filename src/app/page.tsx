@@ -25,7 +25,7 @@ const programs = [
   },
   {
     icon: "⛑️",
-    title: "Clean Water Access",
+    title: "Healthcare Access",
     desc: "Expanding Access to Healthcare",
     color: "border-blue-400",
   },
@@ -94,9 +94,9 @@ export default function HomePage() {
             Growing <span className="text-green-300">Together.</span>
           </h1>
           <p className="text-white/80 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-            GlobalRoots Foundation connects communities, restores ecosystems,
-            and empowers millions of people to build lives of dignity and
-            purpose.
+            Oneg Sason Empowerment Foundation connects communities, restores
+            ecosystems, and empowers millions of people to build lives of
+            dignity and purpose.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -251,11 +251,6 @@ export default function HomePage() {
             <h2 className="font-display text-4xl font-bold text-green-900 mb-4">
               Our Key Programs
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              From environmental restoration to education and clean water, our
-              programs address the most pressing challenges facing humanity
-              today.
-            </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {programs.map((program) => (
