@@ -6,7 +6,10 @@ export async function POST(req: NextRequest) {
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid request body." },
+      { status: 400 },
+    );
   }
 
   const { firstName, lastName, email, subject, message } = body;
@@ -23,7 +26,7 @@ export async function POST(req: NextRequest) {
     const toEmail = process.env.CONTACT_FORM_TO_EMAIL!;
 
     await resend.emails.send({
-      from: `Oneg Sason Empowerment Foundation Contact Form <onboarding@resend.dev>`,
+      from: `Oneg Sason Empowerment Foundation Contact Form <contactus@resend.dev>`,
       to: toEmail,
       replyTo: email,
       subject: `[Contact Form] ${subject}`,
