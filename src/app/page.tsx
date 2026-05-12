@@ -6,40 +6,40 @@ import {
   Users,
   HeartPulse,
   ChevronDown,
+  Utensils,
+  GraduationCap,
+  Stethoscope,
+  Handshake,
+  HandHeart,
 } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { values } from "./about/page";
 
 const programs = [
   {
-    icon: "🌱",
-    title: " Feeding Hope",
+    icon: Utensils,
+    title: "Feeding Hope",
     desc: "Combating Hunger and Food Insecurity",
-    color: "border-green-400",
   },
   {
-    icon: "📚",
+    icon: GraduationCap,
     title: "Education for All",
     desc: "Supporting Child Education and Future Opportunities",
-    color: "border-yellow-400",
   },
   {
-    icon: "⛑️",
+    icon: Stethoscope,
     title: "Healthcare Access",
     desc: "Expanding Access to Healthcare",
-    color: "border-blue-400",
   },
   {
-    icon: "🤝",
+    icon: Handshake,
     title: "Empowerment",
     desc: "Empowering Communities with Dignity",
-    color: "border-purple-400",
   },
   {
-    icon: "✝️",
+    icon: HandHeart,
     title: "Faith in Action Mission",
     desc: "Advancing Faith-Based and Missionary Outreach",
-    color: "border-red-400",
   },
 ];
 
@@ -85,7 +85,7 @@ export default function HomePage() {
           <div className="inline-flex items-center gap-2 bg-yellow-400/20 border border-yellow-400/40 rounded-full px-5 py-2 mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
             <span className="text-yellow-300 text-sm font-medium">
-              Empowering communities since 2005
+              Restoring hope since 2020
             </span>
           </div>
           <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
@@ -111,12 +111,6 @@ export default function HomePage() {
             >
               <Globe size={20} /> Explore Our Work
             </Link>
-          </div>
-          <div className="mt-14 flex flex-wrap justify-center gap-5 text-white/60 text-xs uppercase tracking-widest">
-            <span>✦ UN SDG Champion 2023</span>
-            <span>✦ 140+ Countries</span>
-            <span>✦ 4-Star Rated</span>
-            <span>✦ 94% to Programs</span>
           </div>
         </div>
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 animate-bounce">
@@ -253,21 +247,20 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {programs.map((program) => (
+            {programs.map(({ icon: Icon, title, desc }) => (
               <div
-                key={program.title}
-                className={`bg-white rounded-2xl p-7 card-hover shadow-sm border-b-4 ${program.color} cursor-pointer group`}
+                key={title}
+                className="bg-white rounded-xl p-7 border border-gray-100 hover:border-yellow-400 transition-colors cursor-pointer group"
               >
-                <div className="text-4xl mb-4">{program.icon}</div>
+                <div className="mb-4 flex items-center justify-center">
+                  <Icon size={32} className="text-green-800 group-hover:text-yellow-600 transition-colors" />
+                </div>
                 <h3 className="font-display font-bold text-green-900 text-lg mb-3 group-hover:text-yellow-600 transition-colors">
-                  {program.title}
+                  {title}
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  {program.desc}
+                  {desc}
                 </p>
-                {/* <div className="mt-5 flex items-center gap-2 text-green-700 text-sm font-medium group-hover:gap-3 transition-all">
-                  Learn more <ArrowRight size={14} />
-                </div> */}
               </div>
             ))}
           </div>
@@ -308,17 +301,15 @@ export default function HomePage() {
                 {values.map(({ title, desc }, i) => (
                   <div
                     key={title}
-                    className="p-5 rounded-2xl bg-amber-50 border border-amber-100 group card-hover"
+                    className="p-7 rounded-xl border border-gray-100 hover:border-yellow-400 transition-colors bg-white group"
                   >
-                    <div className="w-8 h-8 rounded-full bg-yellow-400/20 flex items-center justify-center mb-3 group-hover:bg-yellow-400/40 transition-colors">
-                      <span className="text-yellow-600 font-bold font-display">
-                        {i + 1}
-                      </span>
+                    <div className="w-10 h-10 rounded-full bg-yellow-400/20 flex items-center justify-center mb-4 group-hover:bg-yellow-400/40 transition-colors">
+                      <span className="text-yellow-600 font-bold font-display text-lg">{i + 1}</span>
                     </div>
-                    <h3 className="font-display font-bold text-green-900 mb-1 group-hover:text-yellow-600 transition-colors">
+                    <h3 className="font-serif font-semibold text-green-900 text-xl mb-2 group-hover:text-yellow-600 transition-colors">
                       {title}
                     </h3>
-                    <p className="text-gray-600 text-xs leading-relaxed">
+                    <p className="text-gray-600 text-sm leading-relaxed">
                       {desc}
                     </p>
                   </div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, Heart, Users } from "lucide-react";
 import Image from "next/image";
 
@@ -10,19 +11,22 @@ const navLinks = [
   { href: "/about", label: "About Us" },
   { href: "/our-work", label: "Our Work" },
   { href: "/get-involved", label: "Get Involved" },
-  { href: "/impact-partners", label: "Impact & Partners" },
   { href: "/contact", label: "Contact" },
 ];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Home page: use light nav links, others: dark
+  const isHome = pathname === "/";
 
   return (
     <header
@@ -46,9 +50,7 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 className={`relative px-3 py-2 text-sm font-medium nav-link transition-colors duration-200 ${
-                  scrolled
-                    ? "text-gray-700 hover:text-green-700"
-                    : "text-white/90 hover:text-yellow-300"
+                  isHome ? "text-white/90 hover:text-yellow-300" : "text-gray-700 hover:text-green-700"
                 }`}
               >
                 {link.label}

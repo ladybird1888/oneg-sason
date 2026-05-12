@@ -122,14 +122,6 @@ export default function AboutPage() {
                   className="w-full h-[500px] object-cover"
                 />
               </div>
-              <div className="absolute -bottom-5 -right-5 bg-yellow-400 rounded-2xl p-6 shadow-xl">
-                <p className="font-display text-4xl font-bold text-white">
-                  20+
-                </p>
-                <p className="text-yellow-900 text-sm font-semibold">
-                  Years Strong
-                </p>
-              </div>
             </div>
             <div>
               <p className="text-yellow-600 uppercase tracking-widest text-sm font-semibold mb-3">
@@ -213,17 +205,15 @@ export default function AboutPage() {
             </h2>
           </div>
           <div className="grid grid-cols-2 gap-6">
-            {values.map(({ icon: Icon, title, desc, color }) => (
+            {values.map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
-                className="p-8 rounded-2xl border border-gray-100 card-hover bg-white shadow-sm group"
+                className="p-7 rounded-xl border border-gray-100 hover:border-yellow-400 transition-colors bg-white group"
               >
-                <div
-                  className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center mb-5`}
-                >
-                  <Icon size={22} />
+                <div className="w-10 h-10 rounded-full bg-yellow-400/20 flex items-center justify-center mb-4 group-hover:bg-yellow-400/40 transition-colors">
+                  <Icon size={22} className="text-yellow-600" />
                 </div>
-                <h3 className="font-display font-bold text-xl text-green-900 mb-3 group-hover:text-yellow-600 transition-colors">
+                <h3 className="font-serif font-semibold text-green-900 text-xl mb-2 group-hover:text-yellow-600 transition-colors">
                   {title}
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{desc}</p>

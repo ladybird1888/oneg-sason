@@ -63,7 +63,6 @@ const donationAmounts = [25, 50, 100, 250, 500, 1000];
 
 const volunteerRoles = [
   "Education & Mentoring",
-  "Environmental Projects",
   "Health Outreach",
   "Community Development",
   "Fundraising Events",
@@ -202,13 +201,14 @@ export default function GetInvolvedPage() {
                   setCustomAmount(e.target.value);
                   setDonationAmount(null);
                 }}
-                className="input-field pl-8"
+                style={{ paddingLeft: '2.75rem' }}
+                className="input-field"
               />
             </div>
 
             {/* Impact calculator */}
             <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-6 text-sm text-green-800">
-              💡 <strong>${customAmount || donationAmount || 100}</strong>{" "}
+              <strong>${customAmount || donationAmount || 100}</strong>{" "}
               {donationType === "monthly" ? "/month " : ""} can{" "}
               {(customAmount
                 ? parseInt(customAmount)
@@ -235,7 +235,7 @@ export default function GetInvolvedPage() {
               {donationType === "monthly" ? "Monthly" : "Now"}
             </button>
             <p className="text-center text-xs text-gray-500 mt-3">
-              🔒 Secure payment · Tax-deductible · All currencies accepted
+              Secure payment · Tax-deductible · All currencies accepted
             </p>
           </div>
         </div>
