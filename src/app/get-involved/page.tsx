@@ -9,6 +9,7 @@ import {
   CheckCircle,
   ArrowRight,
   Handshake,
+  Loader2,
 } from "lucide-react";
 
 const sponsorshipTiers = [
@@ -78,16 +79,80 @@ export default function GetInvolvedPage() {
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState<string | null>(null);
 
+  const [volunteerForm, setVolunteerForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    country: "",
+    availability: "Part-time (weekends)",
+    introduction: "",
+  });
+  const [volunteerLoading, setVolunteerLoading] = useState(false);
+
+  const [partnerForm, setPartnerForm] = useState({
+    organizationName: "",
+    organizationType: "",
+    contactName: "",
+    jobTitle: "",
+    email: "",
+    areaOfInterest: "Education Programs",
+    message: "",
+  });
+  const [partnerLoading, setPartnerLoading] = useState(false);
+
   const toggleRole = (role: string) => {
     setSelectedRoles((prev) =>
       prev.includes(role) ? prev.filter((r) => r !== role) : [...prev, role],
     );
   };
 
-  const handleSubmit = (formType: string) => (e: React.FormEvent) => {
+  const handleVolunteerSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(formType);
-    setTimeout(() => setSubmitted(null), 4000);
+    setVolunteerLoading(true);
+    try {
+      const res = await fetch("/api/volunteer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...volunteerForm, areasOfInterest: selectedRoles }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.error || "Failed to submit application. Please try again.");
+        return;
+      }
+      setSubmitted("volunteer");
+      setVolunteerForm({ firstName: "", lastName: "", email: "", country: "", availability: "Part-time (weekends)", introduction: "" });
+      setSelectedRoles([]);
+      setTimeout(() => setSubmitted(null), 4000);
+    } catch {
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setVolunteerLoading(false);
+    }
+  };
+
+  const handlePartnerSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPartnerLoading(true);
+    try {
+      const res = await fetch("/api/partnership", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(partnerForm),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.error || "Failed to submit inquiry. Please try again.");
+        return;
+      }
+      setSubmitted("partnership");
+      setPartnerForm({ organizationName: "", organizationType: "", contactName: "", jobTitle: "", email: "", areaOfInterest: "Education Programs", message: "" });
+      setTimeout(() => setSubmitted(null), 4000);
+    } catch {
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setPartnerLoading(false);
+    }
   };
 
   return (
@@ -276,7 +341,7 @@ export default function GetInvolvedPage() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit("volunteer")} className="space-y-5">
+              <form onSubmit={handleVolunteerSubmit} className="space-y-5">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -285,6 +350,8 @@ export default function GetInvolvedPage() {
                     <input
                       type="text"
                       required
+                      value={volunteerForm.firstName}
+                      onChange={(e) => setVolunteerForm({ ...volunteerForm, firstName: e.target.value })}
                       className="input-field"
                       placeholder="Jane"
                     />
@@ -296,6 +363,8 @@ export default function GetInvolvedPage() {
                     <input
                       type="text"
                       required
+                      value={volunteerForm.lastName}
+                      onChange={(e) => setVolunteerForm({ ...volunteerForm, lastName: e.target.value })}
                       className="input-field"
                       placeholder="Doe"
                     />
@@ -308,6 +377,8 @@ export default function GetInvolvedPage() {
                   <input
                     type="email"
                     required
+                    value={volunteerForm.email}
+                    onChange={(e) => setVolunteerForm({ ...volunteerForm, email: e.target.value })}
                     className="input-field"
                     placeholder="jane@example.com"
                   />
@@ -318,6 +389,8 @@ export default function GetInvolvedPage() {
                   </label>
                   <input
                     type="text"
+                    value={volunteerForm.country}
+                    onChange={(e) => setVolunteerForm({ ...volunteerForm, country: e.target.value })}
                     className="input-field"
                     placeholder="Lagos, Nigeria"
                   />
@@ -349,7 +422,11 @@ export default function GetInvolvedPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Availability
                   </label>
-                  <select className="input-field">
+                  <select
+                    className="input-field"
+                    value={volunteerForm.availability}
+                    onChange={(e) => setVolunteerForm({ ...volunteerForm, availability: e.target.value })}
+                  >
                     <option>Part-time (weekends)</option>
                     <option>Part-time (evenings)</option>
                     <option>Full-time (3+ months)</option>
@@ -363,16 +440,23 @@ export default function GetInvolvedPage() {
                   </label>
                   <textarea
                     rows={4}
+                    value={volunteerForm.introduction}
+                    onChange={(e) => setVolunteerForm({ ...volunteerForm, introduction: e.target.value })}
                     className="input-field resize-none"
                     placeholder="Tell us about yourself and why you want to volunteer..."
                   />
                 </div>
                 <button
                   type="submit"
-                  className="btn-green w-full py-4 rounded-xl text-white font-bold text-lg flex items-center justify-center gap-2"
+                  disabled={volunteerLoading}
+                  className="btn-green w-full py-4 rounded-xl text-white font-bold text-lg flex items-center justify-center gap-2 disabled:opacity-60"
                 >
-                  <Users size={20} />
-                  Submit Application
+                  {volunteerLoading ? (
+                    <Loader2 size={20} className="animate-spin" />
+                  ) : (
+                    <Users size={20} />
+                  )}
+                  {volunteerLoading ? "Submitting..." : "Submit Application"}
                 </button>
               </form>
             )}
@@ -415,7 +499,7 @@ export default function GetInvolvedPage() {
               </div>
             ) : (
               <form
-                onSubmit={handleSubmit("partnership")}
+                onSubmit={handlePartnerSubmit}
                 className="space-y-5"
               >
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -426,6 +510,8 @@ export default function GetInvolvedPage() {
                     <input
                       type="text"
                       required
+                      value={partnerForm.organizationName}
+                      onChange={(e) => setPartnerForm({ ...partnerForm, organizationName: e.target.value })}
                       className="input-field"
                       placeholder="Acme Corp"
                     />
@@ -434,7 +520,12 @@ export default function GetInvolvedPage() {
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Organization Type *
                     </label>
-                    <select required className="input-field">
+                    <select
+                      required
+                      className="input-field"
+                      value={partnerForm.organizationType}
+                      onChange={(e) => setPartnerForm({ ...partnerForm, organizationType: e.target.value })}
+                    >
                       <option value="">Select type</option>
                       <option>Corporation</option>
                       <option>NGO / Non-profit</option>
@@ -453,6 +544,8 @@ export default function GetInvolvedPage() {
                     <input
                       type="text"
                       required
+                      value={partnerForm.contactName}
+                      onChange={(e) => setPartnerForm({ ...partnerForm, contactName: e.target.value })}
                       className="input-field"
                       placeholder="John Smith"
                     />
@@ -463,6 +556,8 @@ export default function GetInvolvedPage() {
                     </label>
                     <input
                       type="text"
+                      value={partnerForm.jobTitle}
+                      onChange={(e) => setPartnerForm({ ...partnerForm, jobTitle: e.target.value })}
                       className="input-field"
                       placeholder="Head of CSR"
                     />
@@ -475,6 +570,8 @@ export default function GetInvolvedPage() {
                   <input
                     type="email"
                     required
+                    value={partnerForm.email}
+                    onChange={(e) => setPartnerForm({ ...partnerForm, email: e.target.value })}
                     className="input-field"
                     placeholder="john@example.com"
                   />
@@ -483,7 +580,11 @@ export default function GetInvolvedPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Area of Partnership Interest
                   </label>
-                  <select className="input-field">
+                  <select
+                    className="input-field"
+                    value={partnerForm.areaOfInterest}
+                    onChange={(e) => setPartnerForm({ ...partnerForm, areaOfInterest: e.target.value })}
+                  >
                     <option>Education Programs</option>
                     <option>Women Empowerment</option>
                     <option>Health Programs</option>
@@ -497,16 +598,23 @@ export default function GetInvolvedPage() {
                   <textarea
                     rows={5}
                     required
+                    value={partnerForm.message}
+                    onChange={(e) => setPartnerForm({ ...partnerForm, message: e.target.value })}
                     className="input-field resize-none"
                     placeholder="Describe your organization's goals and how you envision partnering with Oneg Sason Empowerment Foundation..."
                   />
                 </div>
                 <button
                   type="submit"
-                  className="btn-green w-full py-4 rounded-xl text-white font-bold text-lg flex items-center justify-center gap-2"
+                  disabled={partnerLoading}
+                  className="btn-green w-full py-4 rounded-xl text-white font-bold text-lg flex items-center justify-center gap-2 disabled:opacity-60"
                 >
-                  <Building2 size={20} />
-                  Submit Inquiry
+                  {partnerLoading ? (
+                    <Loader2 size={20} className="animate-spin" />
+                  ) : (
+                    <Building2 size={20} />
+                  )}
+                  {partnerLoading ? "Submitting..." : "Submit Inquiry"}
                 </button>
               </form>
             )}

@@ -18,12 +18,29 @@ import Image from "next/image";
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email) return;
+    setLoading(true);
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.error || "Failed to subscribe. Please try again.");
+        return;
+      }
       setSubscribed(true);
       setEmail("");
+    } catch {
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,9 +84,10 @@ export default function Footer() {
                 />
                 <button
                   type="submit"
-                  className="btn-gold px-5 py-3 rounded-full font-semibold text-sm text-white whitespace-nowrap flex items-center gap-2"
+                  disabled={loading}
+                  className="btn-gold px-5 py-3 rounded-full font-semibold text-sm text-white whitespace-nowrap flex items-center gap-2 disabled:opacity-60"
                 >
-                  Subscribe <ArrowRight size={15} />
+                  {loading ? "Subscribing..." : "Subscribe"} {!loading && <ArrowRight size={15} />}
                 </button>
               </form>
             )}

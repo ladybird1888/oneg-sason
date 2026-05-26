@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { supabaseAdmin } from "@/lib/supabase-admin";
 
 export async function POST(req: NextRequest) {
   let body: Record<string, string>;
@@ -21,6 +22,18 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  const { error: dbError } = await supabaseAdmin.from("contact_messages").insert({
+    first_name: firstName,
+    last_name: lastName,
+    email,
+    subject,
+    message,
+  });
+
+  if (dbError) {
+    return NextResponse.json({ error: dbError.message }, { status: 500 });
+  }
+
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const toEmail = process.env.CONTACT_FORM_TO_EMAIL!;
@@ -39,11 +52,9 @@ export async function POST(req: NextRequest) {
         <p>${message.replace(/\n/g, "<br/>")}</p>
       `,
     });
-
-    return NextResponse.json({ success: true });
-  } catch (err: unknown) {
-    const message =
-      err instanceof Error ? err.message : "Failed to send message.";
-    return NextResponse.json({ error: message }, { status: 500 });
+  } catch {
+    // Email is secondary — data is already saved
   }
+
+  return NextResponse.json({ success: true });
 }
