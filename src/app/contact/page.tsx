@@ -275,7 +275,7 @@ export default function ContactPage() {
                         HQ Address
                       </p>
                       <p className="text-sm">
-                        49 Lambe Street Off Ago Palace Way Okota Isolo Lagos
+                        29, Aderemi Akeju Street off Deeper life church Hq Soluyi Gbagada Lagos
                       </p>
                     </div>
                   </div>
@@ -341,7 +341,7 @@ export default function ContactPage() {
                   <div className="text-center">
                     <MapPin size={36} className="text-green-700 mx-auto mb-2" />
                     <p className="text-green-800 font-semibold text-sm">
-                      Okota Isolo Lagos
+                      Soluyi Gbagada Lagos
                     </p>
                     <a
                       href="https://www.google.com/maps/dir/6.4263508,3.4548019/49+Lambe+Iluyomade+Ave,+Ilasamaja,+Lagos+102214,+Lagos/@6.4920026,3.2985465,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x103b8ee418d8fdc3:0xf131132d43753525!2m2!1d3.3047554!2d6.5092787?entry=ttu&g_ep=EgoyMDI2MDQyMC4wIKXMDSoASAFQAw%3D%3D"
