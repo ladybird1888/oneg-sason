@@ -59,55 +59,55 @@ const reports = [
 
 const galleryImages = [
   {
-    src: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80",
+    src: "/images/community-1.jpeg",
     alt: "Community gathering",
     category: "2024",
     event: "Annual Forum",
   },
   {
-    src: "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80",
+    src: "/images/community-2.jpeg",
     alt: "Education program",
     category: "2024",
     event: "Schools Launch",
   },
   {
-    src: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&q=80",
+    src: "/images/community-3.jpeg",
     alt: "Reforestation",
     category: "2023",
     event: "Forest Drive",
   },
   {
-    src: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=600&q=80",
+    src: "/images/community-4.jpeg",
     alt: "Volunteer team",
     category: "2024",
     event: "Field Work",
   },
   {
-    src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80",
+    src: "/images/community-5.jpeg",
     alt: "Women program",
     category: "2023",
     event: "Women Rising",
   },
   {
-    src: "https://images.unsplash.com/photo-1500916434205-0c77489c6cf7?w=600&q=80",
+    src: "/images/community-6.jpeg",
     alt: "Water project",
     category: "2022",
     event: "Water Access",
   },
   {
-    src: "https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=600&q=80",
+    src: "/images/community-1.jpeg",
     alt: "Students",
     category: "2023",
     event: "Education",
   },
   {
-    src: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&q=80",
+    src: "/images/community-2.jpeg",
     alt: "Community build",
     category: "2024",
     event: "Build-a-Thon",
   },
   {
-    src: "https://images.unsplash.com/photo-1541544537156-7627a7a4aa1c?w=600&q=80",
+    src: "/images/community-3.jpeg",
     alt: "Clean water",
     category: "2022",
     event: "Water Drive",
@@ -132,7 +132,7 @@ export default function ImpactPartnersPage() {
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=80')`,
+            backgroundImage: `url('/images/hero.jpg')`,
           }}
         />
         <div className="relative max-w-4xl mx-auto px-4 text-center text-white">

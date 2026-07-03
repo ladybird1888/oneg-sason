@@ -73,7 +73,7 @@ export default function HomePage() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1800&q=80')`,
+            backgroundImage: `url('/images/hero.jpg')`,
           }}
         />
         <div className="hero-overlay absolute inset-0" />
@@ -197,28 +197,28 @@ export default function HomePage() {
               <div className="grid grid-cols-2 gap-3">
                 <div className="rounded-2xl overflow-hidden h-64">
                   <img
-                    src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=500&q=80"
+                    src="/images/community-1.jpeg"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                     alt="Community"
                   />
                 </div>
                 <div className="rounded-2xl overflow-hidden h-64 mt-8">
                   <img
-                    src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&q=80"
+                    src="/images/community-2.jpeg"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                     alt="Field work"
                   />
                 </div>
                 <div className="rounded-2xl overflow-hidden h-44">
                   <img
-                    src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=500&q=80"
+                    src="/images/community-3.jpeg"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                     alt="Education"
                   />
                 </div>
                 <div className="rounded-2xl overflow-hidden h-44 mt-4">
                   <img
-                    src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=500&q=80"
+                    src="/images/community-4.jpeg"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                     alt="Team"
                   />
@@ -318,7 +318,7 @@ export default function HomePage() {
             </div>
             <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[500px]">
               <img
-                src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=80"
+                src="/images/community-5.jpeg"
                 alt="Community values"
                 className="w-full h-full object-cover"
               />

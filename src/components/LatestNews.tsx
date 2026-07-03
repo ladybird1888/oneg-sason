@@ -8,7 +8,7 @@ const articles = [
     title: 'How One Borehole Transformed an Entire Village in Northern Kenya',
     excerpt: 'When GlobalRoots installed a solar-powered borehole in Marsabit County, the ripple effects were extraordinary — school attendance surged, child illness dropped, and women reclaimed 4 hours of their day.',
     date: 'March 18, 2025',
-    image: 'https://images.unsplash.com/photo-1541544537156-7627a7a4aa1c?w=600&q=80',
+    image: '/images/community-3.jpeg',
     readTime: '4 min read',
   },
   {
@@ -17,7 +17,7 @@ const articles = [
     title: 'GlobalRoots Launches 2025 Reforestation Drive: 10 Million Trees in 12 Months',
     excerpt: 'Our most ambitious environmental campaign yet begins this spring, spanning 18 countries across Africa and Southeast Asia.',
     date: 'February 28, 2025',
-    image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&q=80',
+    image: '/images/community-5.jpeg',
     readTime: '3 min read',
   },
   {
@@ -26,7 +26,7 @@ const articles = [
     title: 'EcoTech Inc. Commits $5M to Women Rising Initiative',
     excerpt: 'A landmark corporate partnership will expand microfinance access to 50,000 new women entrepreneurs across West Africa.',
     date: 'January 15, 2025',
-    image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80',
+    image: '/images/community-6.jpeg',
     readTime: '2 min read',
   },
 ];

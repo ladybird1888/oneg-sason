@@ -14,25 +14,25 @@ const team = [
     name: "Dr. Amina Osei",
     role: "Founder & CEO",
     image:
-      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&q=80",
+      "/images/community-2.jpeg",
   },
   {
     name: "Carlos Mendez",
     role: "Director of Programs",
     image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
+      "/images/community-3.jpeg",
   },
   {
     name: "Priya Sharma",
     role: "Head of Partnerships",
     image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
+      "/images/community-4.jpeg",
   },
   {
     name: "James Okafor",
     role: "Chief Impact Officer",
     image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
+      "/images/community-6.jpeg",
   },
 ];
 
@@ -92,7 +92,7 @@ export default function AboutPage() {
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=80')`,
+            backgroundImage: `url('/images/hero.jpg')`,
           }}
         />
         <div className="relative max-w-4xl mx-auto px-4 text-center text-white">
@@ -117,7 +117,7 @@ export default function AboutPage() {
             <div className="relative">
               <div className="rounded-3xl overflow-hidden shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80"
+                  src="/images/community-5.jpeg"
                   alt="Our team in the field"
                   className="w-full h-[500px] object-cover"
                 />

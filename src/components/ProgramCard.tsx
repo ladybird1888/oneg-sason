@@ -7,7 +7,7 @@ interface ProgramCardProps {
   title: string;
   description: string;
   impact: string[];
-  image: string;
+  image?: string;
   regions: string;
   borderColor: string;
   href?: string;

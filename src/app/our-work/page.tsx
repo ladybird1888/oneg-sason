@@ -8,7 +8,7 @@ const programs = [
     title: 'Combating Hunger and Food Insecurity',
     description: 'We support street dwellers and vulnerable communities by providing nutritious meals and essential food supplies. We also assist widows with regular food support, helping to ease the impact of economic hardship on families and communities.',
     impact: ['50M+ trees planted', '1.2M hectares restored', '28 countries active'],
-    image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80',
+    image: '/images/community-1.jpeg',
     color: 'border-green-500',
     regions: 'Africa, Asia, Latin America',
   },
@@ -18,7 +18,7 @@ const programs = [
     title: 'Supporting Child Education and Future Opportunities',
     description: 'We are committed to helping children from vulnerable communities gain access to quality education, learning materials, and opportunities that promote literacy, personal growth, and renewed hope for a brighter future.',
     impact: ['800K+ students enrolled', '3,200 schools built', '42,000 teachers trained'],
-    image: 'https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=800&q=80',
+    image: '/images/community-2.jpeg',
     color: 'border-yellow-500',
     regions: 'Sub-Saharan Africa, South Asia',
   },
@@ -28,7 +28,7 @@ const programs = [
     title: 'Expanding Access to Healthcare',
     description: 'Our programs are dedicated to improving access to quality healthcare for widows and people in vulnerable communities. We also support continued access to essential medications and medical care for individuals managing chronic health conditions.',
     impact: ['3M+ people served/year', '12,000 wells drilled', '85% water quality rate'],
-    image: 'https://images.unsplash.com/photo-1541544537156-7627a7a4aa1c?w=800&q=80',
+    image: '/images/community-3.jpeg',
     color: 'border-blue-500',
     regions: 'East Africa, South Asia, Pacific Islands',
   },
@@ -38,7 +38,7 @@ const programs = [
     title: 'Empowering Communities with Dignity',
     description: 'We are committed to empowering men and women in vulnerable communities with opportunities and support for sustainable living. Through this, we help restore dignity, stability, and hope to individuals and families.',
     impact: ['280K+ women supported', '$45M in microloans issued', '70% business survival rate'],
-    image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80',
+    image: '/images/community-4.jpeg',
     color: 'border-purple-500',
     regions: 'Global',
   },
@@ -48,7 +48,7 @@ const programs = [
     title: 'Advancing Faith-Based and Missionary Outreach',
     description: 'We believe in the holistic transformation of individuals and communities through faith and compassion. This is why we support missionaries and outreach initiatives that share the Gospel, foster spiritual growth, and bring hope, healing, and wholeness to lives and communities.',
     impact: ['5.2M consultations/year', '1,400 health workers trained', '60 mobile clinics'],
-    image: 'https://images.unsplash.com/photo-1584515933487-779824d29309?w=800&q=80',
+    image: '/images/community-5.jpeg',
     color: 'border-red-500',
     regions: 'Africa, Latin America',
   },
@@ -61,7 +61,7 @@ export default function OurWorkPage() {
       <section className="relative py-24 bg-green-800 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1500916434205-0c77489c6cf7?w=1600&q=80')` }}
+          style={{ backgroundImage: `url('/images/hero.jpg')` }}
         />
         <div className="relative max-w-4xl mx-auto px-4 text-center text-white">
           <p className="text-yellow-400 uppercase tracking-widest text-sm font-medium mb-4">Programs & Initiatives</p>

@@ -9,7 +9,7 @@ const testimonials = [
     name: "Fatima Al-Hassan",
     role: "Cooperative Leader",
     location: "Northern Nigeria",
-    image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&q=80",
+    image: "/images/community-1.jpeg",
     program: "Women Rising Initiative",
   },
   {
@@ -17,7 +17,7 @@ const testimonials = [
     name: "Emmanuel Osei",
     role: "School Principal",
     location: "Rural Ghana",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80",
+    image: "/images/community-2.jpeg",
     program: "Schools Without Borders",
   },
   {
@@ -25,7 +25,7 @@ const testimonials = [
     name: "Amara Diallo",
     role: "Mother & Community Member",
     location: "Southern Senegal",
-    image: "https://images.unsplash.com/photo-1543269664-56d93c1b41a6?w=200&q=80",
+    image: "/images/community-4.jpeg",
     program: "Clean Water for Life",
   },
   {
@@ -33,7 +33,7 @@ const testimonials = [
     name: "Sarah Chen",
     role: "Head of CSR",
     location: "EcoTech Inc, Singapore",
-    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&q=80",
+    image: "/images/community-6.jpeg",
     program: "Corporate Partner",
   },
 ];

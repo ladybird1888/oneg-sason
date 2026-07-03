@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "Oneg Sason Empowerment Foundation",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=80",
+        url: "/images/hero.jpg",
       },
     ],
   },

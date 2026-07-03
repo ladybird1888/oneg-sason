@@ -79,7 +79,7 @@ export default function ContactPage() {
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1600&q=80')`,
+            backgroundImage: `url('/images/hero.jpg')`,
           }}
         />
         <div className="relative max-w-4xl mx-auto px-4 text-center text-white">
