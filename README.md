@@ -165,7 +165,7 @@ const impactStats = [
 ];
 ```
 
-### Adding a New Program
+### Adding a New Program.
 
 Add to the `programs` array in `src/app/our-work/page.tsx`:
 
