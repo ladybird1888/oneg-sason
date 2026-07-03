@@ -195,7 +195,7 @@ export default function Footer() {
                   className="text-yellow-400 flex-shrink-0 mt-0.5"
                 />
                 <span>
-                  49 Lambe Street Off Ago Palace Way Okota Isolo Lagos
+                  29, Aderemi Akeju Street off Deeper life church Hq Soluyi Gbagada Lagos
                 </span>
               </li>
               <li className="flex items-center gap-3 text-green-200 text-sm">
