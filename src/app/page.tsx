@@ -13,7 +13,7 @@ import {
   HandHeart,
 } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
-import { values } from "./about/page";
+import { values } from "@/lib/constants";
 
 const programs = [
   {

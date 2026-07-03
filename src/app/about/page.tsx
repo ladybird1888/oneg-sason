@@ -8,6 +8,7 @@ import {
   Award,
   Globe,
 } from "lucide-react";
+import { values } from "@/lib/constants";
 
 const team = [
   {
@@ -33,45 +34,6 @@ const team = [
     role: "Chief Impact Officer",
     image:
       "/images/community-6.jpeg",
-  },
-];
-
-export const values = [
-  {
-    icon: Heart,
-    title: "Inherent Dignity",
-    desc: "Treating every individual with honor, humility, and profound respect.",
-    color: "bg-red-50 text-red-600",
-  },
-  {
-    icon: Target,
-    title: "Integrity & Stewardship",
-    desc: "Maintaining moral goodness and responsible management of all entrusted resources.",
-    color: "bg-yellow-50 text-yellow-600",
-  },
-  {
-    icon: Globe,
-    title: "Unity & Peace",
-    desc: "Fostering collaborative environments where individuals feel valued and uplifted.",
-    color: "bg-green-50 text-green-600",
-  },
-  // {
-  //   icon: Award,
-  //   title: "Excellence",
-  //   desc: "We pursue the highest standards in program delivery, governance, and impact.",
-  //   color: "bg-blue-50 text-blue-600",
-  // },
-  // {
-  //   icon: Users,
-  //   title: "Collaboration",
-  //   desc: "We believe lasting change happens when communities, governments, and NGOs work together.",
-  //   color: "bg-purple-50 text-purple-600",
-  // },
-  {
-    icon: Eye,
-    title: "Resilient Joy",
-    desc: "Pursuing lasting restoration with patience and disciplined endurance.",
-    color: "bg-amber-50 text-amber-600",
   },
 ];
 
