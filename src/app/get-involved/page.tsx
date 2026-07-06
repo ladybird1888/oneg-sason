@@ -84,7 +84,6 @@ export default function GetInvolvedPage() {
     lastName: "",
     email: "",
     country: "",
-    availability: "Part-time (weekends)",
     introduction: "",
   });
   const [volunteerLoading, setVolunteerLoading] = useState(false);
@@ -121,7 +120,7 @@ export default function GetInvolvedPage() {
         return;
       }
       setSubmitted("volunteer");
-      setVolunteerForm({ firstName: "", lastName: "", email: "", country: "", availability: "Part-time (weekends)", introduction: "" });
+      setVolunteerForm({ firstName: "", lastName: "", email: "", country: "", introduction: "" });
       setSelectedRoles([]);
       setTimeout(() => setSubmitted(null), 4000);
     } catch {
@@ -320,8 +319,7 @@ export default function GetInvolvedPage() {
               Volunteer With Us
             </h2>
             <p className="text-gray-600">
-              Join 35,000+ volunteers making a daily difference around the
-              world.
+              Join volunteers making a daily difference around the world.
             </p>
           </div>
 
@@ -417,22 +415,6 @@ export default function GetInvolvedPage() {
                       </label>
                     ))}
                   </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Availability
-                  </label>
-                  <select
-                    className="input-field"
-                    value={volunteerForm.availability}
-                    onChange={(e) => setVolunteerForm({ ...volunteerForm, availability: e.target.value })}
-                  >
-                    <option>Part-time (weekends)</option>
-                    <option>Part-time (evenings)</option>
-                    <option>Full-time (3+ months)</option>
-                    <option>Remote only</option>
-                    <option>Flexible</option>
-                  </select>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
