@@ -134,6 +134,7 @@ export default function Footer() {
                 { href: "/about", label: "About Us" },
                 { href: "/our-work", label: "Our Work" },
                 { href: "/get-involved", label: "Get Involved" },
+                { href: "/impact-partners", label: "Impact & Gallery" },
                 { href: "/contact", label: "Contact" },
               ].map((link) => (
                 <li key={link.href}>
@@ -163,6 +164,7 @@ export default function Footer() {
                 { href: "/get-involved#volunteer", label: "Volunteer" },
                 { href: "/get-involved#partnership", label: "Partner With Us" },
                 { href: "/get-involved#sponsor", label: "Sponsorship" },
+                { href: "/impact-partners#gallery", label: "Photo Gallery" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link

@@ -319,7 +319,7 @@ export default function GetInvolvedPage() {
               Volunteer With Us
             </h2>
             <p className="text-gray-600">
-              Join volunteers making a daily difference around the world.
+              Join the team of our volunteers.
             </p>
           </div>
 
