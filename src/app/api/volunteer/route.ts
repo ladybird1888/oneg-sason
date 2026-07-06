@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { firstName, lastName, email, country, areasOfInterest, availability, introduction } = body;
+  const { firstName, lastName, email, country, areasOfInterest, introduction } = body;
 
   if (!firstName || !lastName || !email) {
     return NextResponse.json(
@@ -27,7 +27,6 @@ export async function POST(req: NextRequest) {
     email,
     country: country || null,
     areas_of_interest: areasOfInterest || [],
-    availability: availability || null,
     introduction: introduction || null,
   });
 

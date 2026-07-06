@@ -41,7 +41,7 @@ export default function LatestNews() {
             <h2 className="font-display text-4xl font-bold text-green-900">News & Stories</h2>
           </div>
           <Link
-            href="/impact-partners"
+            href="/our-work"
             className="inline-flex items-center gap-2 text-green-700 font-semibold text-sm hover:gap-3 transition-all"
           >
             View all stories <ArrowRight size={15} />
