@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { flw } from "@/lib/flutterwave";
+import { getFlw } from "@/lib/flutterwave";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 export async function POST(req: Request) {
@@ -14,7 +14,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const response = await flw.Transaction.verify({ id: transaction_id });
+    const response = await getFlw().Transaction.verify({ id: transaction_id });
 
     if (response.data.status === "successful") {
       const verifiedAmount = Number(response.data.amount);
