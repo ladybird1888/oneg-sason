@@ -42,8 +42,13 @@ CREATE TABLE IF NOT EXISTS contact_messages (
 
 CREATE TABLE IF NOT EXISTS donations (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  tx_ref TEXT UNIQUE,
   amount DECIMAL(10,2) NOT NULL,
   donation_type TEXT NOT NULL,
+  currency TEXT NOT NULL DEFAULT 'NGN',
   email TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+-- If the donations table already exists (ran schema before this line was added):
+ALTER TABLE donations ADD COLUMN IF NOT EXISTS tx_ref TEXT UNIQUE;

@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
 const testimonials = [
   {
-    quote: "GlobalRoots changed everything for our village. We now have clean water, our children go to school, and my women's cooperative has grown to 40 members. I never dreamed life could be this different.",
+    quote: "Oneg Sason changed everything for our village. We now have clean water, our children go to school, and my women's cooperative has grown to 40 members. I never dreamed life could be this different.",
     name: "Fatima Al-Hassan",
     role: "Cooperative Leader",
     location: "Northern Nigeria",
@@ -13,7 +13,7 @@ const testimonials = [
     program: "Women Rising Initiative",
   },
   {
-    quote: "Our school had no roof and no teachers just three years ago. Today, 280 students come every morning. The GlobalRoots team didn't just build walls — they built futures for our entire community.",
+    quote: "Our school had no roof and no teachers just three years ago. Today, 280 students come every morning. The Oneg Sason team didn't just build walls — they built futures for our entire community.",
     name: "Emmanuel Osei",
     role: "School Principal",
     location: "Rural Ghana",
@@ -29,7 +29,7 @@ const testimonials = [
     program: "Clean Water for Life",
   },
   {
-    quote: "As a corporate partner, we've witnessed firsthand how GlobalRoots operates — with total transparency, genuine community ownership, and measurable results. It's the partnership we're most proud of.",
+    quote: "As a corporate partner, we've witnessed firsthand how Oneg Sason operates — with total transparency, genuine community ownership, and measurable results. It's the partnership we're most proud of.",
     name: "Sarah Chen",
     role: "Head of CSR",
     location: "EcoTech Inc, Singapore",

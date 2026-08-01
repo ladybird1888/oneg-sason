@@ -1,16 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Heart,
   Users,
   Building2,
   Star,
   CheckCircle,
-  ArrowRight,
   Handshake,
   Loader2,
+  ExternalLink,
 } from "lucide-react";
+import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 
 const sponsorshipTiers = [
   {
@@ -60,7 +61,10 @@ const sponsorshipTiers = [
   },
 ];
 
-const donationAmounts = [25, 50, 100, 250, 500, 1000];
+const donationAmounts: Record<"NGN" | "EUR", number[]> = {
+  NGN: [25000, 50000, 100000, 250000, 500000, 1000000],
+  EUR: [25, 50, 100, 250, 500, 1000],
+};
 
 const volunteerRoles = [
   "Education & Mentoring",
@@ -73,11 +77,94 @@ const volunteerRoles = [
 ];
 
 export default function GetInvolvedPage() {
-  const [donationAmount, setDonationAmount] = useState<number | null>(100);
+  const [donationAmount, setDonationAmount] = useState<number | null>(
+    donationAmounts.NGN[0],
+  );
   const [customAmount, setCustomAmount] = useState("");
   const [donationType, setDonationType] = useState<"once" | "monthly">("once");
+  const [donationCurrency, setDonationCurrency] = useState<"NGN" | "EUR">("NGN");
+  const [donationLoading, setDonationLoading] = useState(false);
+  const [donorEmail, setDonorEmail] = useState("");
+  const [donorName, setDonorName] = useState("");
+  const [flutterTxRef, setFlutterTxRef] = useState("");
+  const [showDonateThankYou, setShowDonateThankYou] = useState(false);
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState<string | null>(null);
+  const flutterInitRef = useRef(false);
+
+  const currencySymbol = donationCurrency === "NGN" ? "\u20A6" : "\u20AC";
+
+  const formatNumber = (n: number) => n.toLocaleString("en-US");
+
+  const displayAmount = () => {
+    const n = customAmount ? parseInt(customAmount) : donationAmount ?? 0;
+    return n ? formatNumber(n) : "";
+  };
+
+  const flutterConfig = flutterTxRef
+    ? {
+        public_key: process.env.NEXT_PUBLIC_FLW_PUBLIC_KEY!,
+        tx_ref: flutterTxRef,
+        amount: customAmount ? parseInt(customAmount) : donationAmount || 100,
+        currency: donationCurrency,
+        payment_options:
+          donationCurrency === "NGN"
+            ? "card,mobilemoney,ussd,banktransfer"
+            : "card",
+        customer: {
+          email: donorEmail || "donor@onegsason.org",
+          name: donorName || "Anonymous Donor",
+          phone_number: "00000000000",
+        },
+        customizations: {
+          title: "Oneg Sason Donation",
+          description:
+            donationType === "monthly"
+              ? "Monthly donation"
+              : "One-time donation",
+        },
+      }
+    : null;
+
+  const handleFlutterPayment = useFlutterwave(flutterConfig as any);
+
+  useEffect(() => {
+    if (flutterTxRef && flutterInitRef.current) {
+      flutterInitRef.current = false;
+      handleFlutterPayment({
+        callback: async (response) => {
+          if (response.status === "successful") {
+            const finalAmount = customAmount
+              ? parseInt(customAmount)
+              : donationAmount || 100;
+            try {
+              await fetch("/api/flutterwave/verify", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  transaction_id: response.transaction_id,
+                  tx_ref: response.tx_ref,
+                  amount: finalAmount,
+                  donationType,
+                  currency: donationCurrency,
+                  email: donorEmail || null,
+                }),
+              });
+            } catch {
+              // donation still recorded by webhook/admin
+            }
+            setShowDonateThankYou(true);
+            setDonationLoading(false);
+          }
+          closePaymentModal();
+        },
+        onClose: () => {
+          setDonationLoading(false);
+          setFlutterTxRef("");
+        },
+      });
+    }
+  }, [flutterTxRef]);
 
   const [volunteerForm, setVolunteerForm] = useState({
     firstName: "",
@@ -210,97 +297,189 @@ export default function GetInvolvedPage() {
               Make a Donation
             </h2>
             <p className="text-gray-600">
-              Every dollar goes directly to programs that transform lives.
+              Every contribution goes directly to programs that transform lives.
             </p>
           </div>
 
           <div className="bg-amber-50 rounded-3xl p-8 shadow-sm">
-            {/* Frequency */}
-            <div className="flex gap-3 mb-8 bg-white rounded-2xl p-1.5 w-fit mx-auto">
-              {(["once", "monthly"] as const).map((type) => (
+            {showDonateThankYou ? (
+              <div className="text-center py-10">
+                <CheckCircle
+                  size={50}
+                  className="text-green-500 mx-auto mb-4"
+                />
+                <h3 className="font-display text-2xl font-bold text-green-900 mb-2">
+                  Thank You for Your Donation!
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  Your generosity will transform lives. A receipt has been sent
+                  to your email.
+                </p>
                 <button
-                  key={type}
-                  onClick={() => setDonationType(type)}
-                  className={`px-6 py-2.5 rounded-xl font-semibold text-sm capitalize transition-all ${
-                    donationType === type
-                      ? "bg-green-700 text-white shadow-md"
-                      : "text-gray-600 hover:text-green-700"
-                  }`}
-                >
-                  {type === "once" ? "One-Time" : "Monthly"}
-                </button>
-              ))}
-            </div>
-
-            {/* Amount selector */}
-            <div className="grid grid-cols-3 gap-3 mb-5">
-              {donationAmounts.map((amount) => (
-                <button
-                  key={amount}
                   onClick={() => {
-                    setDonationAmount(amount);
+                    setShowDonateThankYou(false);
                     setCustomAmount("");
+                    setDonationAmount(100);
+                    setDonorEmail("");
+                    setDonorName("");
+                    setDonationCurrency("NGN");
                   }}
-                  className={`py-3 rounded-xl font-bold text-lg transition-all ${
-                    donationAmount === amount && !customAmount
-                      ? "bg-yellow-400 text-green-900 shadow-md scale-105"
-                      : "bg-white text-gray-700 border-2 border-gray-200 hover:border-yellow-400"
-                  }`}
+                  className="btn-green px-6 py-3 rounded-xl text-white font-bold"
                 >
-                  ${amount}
+                  Make Another Donation
                 </button>
-              ))}
-            </div>
+              </div>
+            ) : (
+              <>
+                {/* Frequency & Currency */}
+                <div className="flex flex-wrap gap-3 mb-8 justify-center">
+                  <div className="flex gap-1 bg-white rounded-2xl p-1.5">
+                    {(["once", "monthly"] as const).map((type) => (
+                      <button
+                        key={type}
+                        onClick={() => setDonationType(type)}
+                        className={`px-5 py-2 rounded-xl font-semibold text-sm capitalize transition-all ${
+                          donationType === type
+                            ? "bg-green-700 text-white shadow-md"
+                            : "text-gray-600 hover:text-green-700"
+                        }`}
+                      >
+                        {type === "once" ? "One-Time" : "Monthly"}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="flex gap-1 bg-white rounded-2xl p-1.5">
+                    {(["NGN", "EUR"] as const).map((cur) => (
+                      <button
+                        key={cur}
+                        onClick={() => {
+                          setDonationCurrency(cur);
+                          setDonationAmount(donationAmounts[cur][0]);
+                          setCustomAmount("");
+                        }}
+                        className={`px-4 py-2 rounded-xl font-semibold text-sm transition-all ${
+                          donationCurrency === cur
+                            ? "bg-yellow-400 text-green-900 shadow-md"
+                            : "text-gray-600 hover:text-yellow-600"
+                        }`}
+                      >
+                        {cur}
+                      </button>
+                    ))}
+                  </div>
+                </div>
 
-            {/* Custom amount */}
-            <div className="relative mb-6">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold">
-                $
-              </span>
-              <input
-                type="number"
-                placeholder="Enter custom amount"
-                value={customAmount}
-                onChange={(e) => {
-                  setCustomAmount(e.target.value);
-                  setDonationAmount(null);
-                }}
-                style={{ paddingLeft: '2.75rem' }}
-                className="input-field"
-              />
-            </div>
+                {/* Amount selector */}
+                <div className="grid grid-cols-3 gap-3 mb-5">
+                  {donationAmounts[donationCurrency].map((amount) => (
+                    <button
+                      key={amount}
+                      onClick={() => {
+                        setDonationAmount(amount);
+                        setCustomAmount("");
+                      }}
+                      className={`py-3 rounded-xl font-bold text-lg transition-all ${
+                        donationAmount === amount && !customAmount
+                          ? "bg-yellow-400 text-green-900 shadow-md scale-105"
+                          : "bg-white text-gray-700 border-2 border-gray-200 hover:border-yellow-400"
+                      }`}
+                    >
+                      {currencySymbol}
+                      {formatNumber(amount)}
+                    </button>
+                  ))}
+                </div>
 
-            {/* Impact calculator */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-6 text-sm text-green-800">
-              <strong>${customAmount || donationAmount || 100}</strong>{" "}
-              {donationType === "monthly" ? "/month " : ""} can{" "}
-              {(customAmount
-                ? parseInt(customAmount)
-                : donationAmount || 100) >= 500
-                ? "fund a full clean water installation for a family of five."
-                : (customAmount
+                {/* Custom amount */}
+                <div className="relative mb-6">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold">
+                    {currencySymbol}
+                  </span>
+                  <input
+                    type="number"
+                    placeholder={`Enter custom amount in ${donationCurrency}`}
+                    value={customAmount}
+                    onChange={(e) => {
+                      setCustomAmount(e.target.value);
+                      setDonationAmount(null);
+                    }}
+                    style={{ paddingLeft: "2.75rem" }}
+                    className="input-field"
+                  />
+                </div>
+
+                {/* Donor info */}
+                <div className="space-y-3 mb-4">
+                  <input
+                    type="text"
+                    placeholder="Your name (optional)"
+                    value={donorName}
+                    onChange={(e) => setDonorName(e.target.value)}
+                    className="input-field"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Your email for receipt (optional)"
+                    value={donorEmail}
+                    onChange={(e) => setDonorEmail(e.target.value)}
+                    className="input-field"
+                  />
+                </div>
+
+                {/* Impact calculator */}
+                <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-6 text-sm text-green-800">
+                  <strong>
+                    {currencySymbol}
+                    {displayAmount() || "100"}
+                  </strong>{" "}
+                  {donationType === "monthly" ? "/month " : ""} can{" "}
+                  {(customAmount
+                    ? parseInt(customAmount)
+                    : donationAmount || 100) >=
+                    (donationCurrency === "NGN" ? 1000000 : 500)
+                    ? "help provide a family with food, healthcare, and school supplies for a whole month."
+                    : (customAmount
+                        ? parseInt(customAmount)
+                        : donationAmount || 100) >=
+                        (donationCurrency === "NGN" ? 100000 : 100)
+                      ? "put nutritious meals on the table for vulnerable families and keep children in school."
+                      : "go a long way to support a family with food and essential care."}
+                </div>
+
+                <button
+                  onClick={() => {
+                    const finalAmount = customAmount
                       ? parseInt(customAmount)
-                      : donationAmount || 100) >= 100
-                  ? "provide school supplies for 10 students for an entire year."
-                  : "plant 5 trees and support local reforestation efforts."}
-            </div>
-
-            <button
-              onClick={() => alert("Redirecting to secure payment gateway...")}
-              className="btn-gold w-full py-4 rounded-xl text-white font-bold text-lg flex items-center justify-center gap-2"
-            >
-              <Heart size={20} />
-              Donate{" "}
-              {customAmount
-                ? `$${customAmount}`
-                : donationAmount
-                  ? `$${donationAmount}`
-                  : ""}{" "}
-              {donationType === "monthly" ? "Monthly" : "Now"}
-            </button>
-            <p className="text-center text-xs text-gray-500 mt-3">
-              Secure payment · Tax-deductible · All currencies accepted
-            </p>
+                      : donationAmount;
+                    if (!finalAmount || finalAmount < 1) return;
+                    setDonationLoading(true);
+                    flutterInitRef.current = true;
+                    setFlutterTxRef(
+                      `OSEF-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
+                    );
+                  }}
+                  disabled={donationLoading}
+                  className="btn-gold w-full py-4 rounded-xl text-white font-bold text-lg flex items-center justify-center gap-2 disabled:opacity-60"
+                >
+                  {donationLoading ? (
+                    <Loader2 size={20} className="animate-spin" />
+                  ) : (
+                    <Heart size={20} />
+                  )}
+                  {donationLoading
+                    ? "Opening..."
+                    : "Donate " +
+                      currencySymbol +
+                      (displayAmount() || "") +
+                      " " +
+                      (donationType === "monthly" ? "Monthly" : "Now")}
+                </button>
+                <p className="text-center text-xs text-gray-500 mt-3">
+                  <ExternalLink size={12} className="inline mr-1" />
+                  Powered by Flutterwave · Secure payment
+                </p>
+              </>
+            )}
           </div>
         </div>
       </section>

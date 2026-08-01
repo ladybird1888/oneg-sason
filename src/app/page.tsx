@@ -330,7 +330,7 @@ export default function HomePage() {
                   </p>
                   <p className="text-sm text-white/90 leading-relaxed">
                     We will always put communities first, report honestly, and
-                    never stop pushing for a more just and sustainable world.
+                    never stop pushing for a more just and compassionate world.
                   </p>
                 </div>
               </div>

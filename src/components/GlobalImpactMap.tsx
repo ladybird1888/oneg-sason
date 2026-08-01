@@ -87,8 +87,8 @@ export default function GlobalImpactMap() {
               { num: 4, label: 'Quality Education', color: 'bg-red-500' },
               { num: 5, label: 'Gender Equality', color: 'bg-orange-500' },
               { num: 6, label: 'Clean Water', color: 'bg-blue-500' },
-              { num: 13, label: 'Climate Action', color: 'bg-green-600' },
-              { num: 15, label: 'Life on Land', color: 'bg-lime-600' },
+              { num: 8, label: 'Decent Work', color: 'bg-purple-500' },
+              { num: 16, label: 'Peace & Justice', color: 'bg-amber-500' },
               { num: 17, label: 'Partnerships', color: 'bg-blue-700' },
             ].map(({ num, label, color }) => (
               <div
