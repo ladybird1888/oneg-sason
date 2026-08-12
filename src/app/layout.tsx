@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: "%s | Oneg Sason Empowerment Foundation",
   },
   description:
-    "A Oneg Sason Empowerment Foundation dedicated to community development, environmental sustainability, and human empowerment.",
+    "A Oneg Sason Empowerment Foundation dedicated to community development, human empowerment, and supporting vulnerable families.",
   keywords: [
     "foundation",
     "non-profit",

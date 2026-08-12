@@ -103,7 +103,7 @@ export default function Footer() {
             </Link>
             <p className="text-green-200 text-sm leading-relaxed mb-5">
               Empowering communities worldwide through education,
-              sustainability, and human dignity since 2020.
+              compassion, and human dignity since 2020.
             </p>
             <div className="flex gap-3">
               {[
