@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -8,6 +9,12 @@ import {
   Award,
   Globe,
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "Learn about Oneg Sason Empowerment Foundation — a faith-driven nonprofit restoring hope and dignity to vulnerable communities across Africa.",
+};
 import { values } from "@/lib/constants";
 
 const team = [

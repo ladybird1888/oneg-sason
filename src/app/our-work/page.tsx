@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import Link from 'next/link';
 import { ArrowRight, MapPin, Users, TrendingUp, CheckCircle } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: "Our Work",
+  description:
+    "Explore the programs of Oneg Sason Empowerment Foundation — feeding hope, education for all, healthcare access, and community empowerment.",
+};
 
 const programs = [
   {
