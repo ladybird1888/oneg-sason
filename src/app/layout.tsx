@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://onegsason.org"),
   title: {
     default: "Oneg Sason Empowerment Foundation | Empowerment through hope",
     template: "%s | Oneg Sason Empowerment Foundation",
