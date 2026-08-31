@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       tx_ref,
-      public_key: process.env.NEXT_PUBLIC_FLW_PUBLIC_KEY!,
+      public_key: process.env.NEXT_PUBLIC_FLW_KEY!,
     });
   } catch (error) {
     console.error("Error initiating Flutterwave:", error);

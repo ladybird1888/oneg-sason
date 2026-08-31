@@ -2,8 +2,15 @@ import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 export async function POST(req: Request) {
+  if (!process.env.FLW_WEBHOOK_HASH) {
+    console.error(
+      "FLW_WEBHOOK_HASH is not set. Set it in your Flutterwave dashboard (webhook secret hash) and as an env var.",
+    );
+    return NextResponse.json({ error: "Webhook not configured" }, { status: 500 });
+  }
+
   const hash = req.headers.get("verif-hash");
-  if (!process.env.FLW_WEBHOOK_HASH || hash !== process.env.FLW_WEBHOOK_HASH) {
+  if (hash !== process.env.FLW_WEBHOOK_HASH) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
   }
 

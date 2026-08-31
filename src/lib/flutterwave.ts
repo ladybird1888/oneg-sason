@@ -5,7 +5,7 @@ let flw: any;
 export function getFlw() {
   if (!flw) {
     flw = new Flutterwave(
-      process.env.NEXT_PUBLIC_FLW_PUBLIC_KEY!,
+      process.env.NEXT_PUBLIC_FLW_KEY!,
       process.env.FLW_SECRET_KEY!,
     );
   }

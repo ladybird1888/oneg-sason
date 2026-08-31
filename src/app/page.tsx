@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import {
   ArrowRight,
   Globe,
@@ -14,6 +15,17 @@ import {
 } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { values } from "@/lib/constants";
+
+export const metadata: Metadata = {
+  description:
+    "Oneg Sason Empowerment Foundation is a faith-driven nonprofit empowering vulnerable families through community development, education, healthcare, and food support. Donate today.",
+  openGraph: {
+    title: "Oneg Sason Empowerment Foundation",
+    description:
+      "A faith-driven nonprofit transforming lives through community development, education, and healthcare.",
+    url: "https://onegsason.org",
+  },
+};
 
 const programs = [
   {
