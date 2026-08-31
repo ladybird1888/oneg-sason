@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     title: "Oneg Sason Empowerment Foundation",
     description:
       "A faith-driven nonprofit transforming lives through community development, education, and healthcare.",
-    url: "https://onegsason.org",
+    url: "https://www.onegsason.org",
   },
 };
 
