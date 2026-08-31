@@ -122,7 +122,7 @@ export default function GetInvolvedPage() {
         donationType === "monthly"
           ? "Monthly donation"
           : "One-time donation",
-      logo: "https://onegsason.org/images/logo.jpeg",
+      logo: "https://www.onegsason.org/images/logo.jpeg",
     },
   };
 

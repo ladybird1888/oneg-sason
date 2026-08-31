@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://onegsason.org"),
+  metadataBase: new URL("https://www.onegsason.org"),
   title: {
     default: "Oneg Sason Empowerment Foundation | Empowerment through hope",
     template: "%s | Oneg Sason Empowerment Foundation",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title: "Oneg Sason Empowerment Foundation | Empowerment through hope",
     description:
       "A faith-driven charity transforming lives through community development, education, and healthcare. Donate today.",
-    url: "https://onegsason.org",
+    url: "https://www.onegsason.org",
     locale: "en_US",
     images: [
       {
@@ -85,9 +85,9 @@ export default function RootLayout({
               "@type": "NGO",
               name: "Oneg Sason Empowerment Foundation",
               alternateName: "Oneg Sason",
-              url: "https://onegsason.org",
-              logo: "https://onegsason.org/images/logo.jpeg",
-              image: "https://onegsason.org/images/hero.jpg",
+              url: "https://www.onegsason.org",
+              logo: "https://www.onegsason.org/images/logo.jpeg",
+              image: "https://www.onegsason.org/images/hero.jpg",
               description:
                 "A faith-driven, community-centered charity empowering vulnerable families through education, healthcare, and food support.",
               foundingDate: "2020",
@@ -103,7 +103,7 @@ export default function RootLayout({
               "@type": "WebSite",
               name: "Oneg Sason Empowerment Foundation",
               alternateName: "Oneg Sason",
-              url: "https://onegsason.org",
+              url: "https://www.onegsason.org",
             }),
           }}
         />
