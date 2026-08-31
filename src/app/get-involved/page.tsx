@@ -88,6 +88,7 @@ export default function GetInvolvedPage() {
   const [donorName, setDonorName] = useState("");
   const [flutterTxRef, setFlutterTxRef] = useState("");
   const [showDonateThankYou, setShowDonateThankYou] = useState(false);
+  const [flutterError, setFlutterError] = useState<string | null>(null);
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState<string | null>(null);
   const flutterInitRef = useRef(false);
@@ -101,68 +102,85 @@ export default function GetInvolvedPage() {
     return n ? formatNumber(n) : "";
   };
 
-  const flutterConfig = flutterTxRef
-    ? {
-        public_key: process.env.NEXT_PUBLIC_FLW_PUBLIC_KEY!,
-        tx_ref: flutterTxRef,
-        amount: customAmount ? parseInt(customAmount) : donationAmount || 100,
-        currency: donationCurrency,
-        payment_options:
-          donationCurrency === "NGN"
-            ? "card,mobilemoney,ussd,banktransfer"
-            : "card",
-        customer: {
-          email: donorEmail || "donor@onegsason.org",
-          name: donorName || "Anonymous Donor",
-          phone_number: "00000000000",
-        },
-        customizations: {
-          title: "Oneg Sason Donation",
-          description:
-            donationType === "monthly"
-              ? "Monthly donation"
-              : "One-time donation",
-        },
-      }
-    : null;
+  const flutterConfig = {
+    public_key: process.env.NEXT_PUBLIC_FLW_KEY!,
+    tx_ref: flutterTxRef || "placeholder",
+    amount: customAmount ? parseInt(customAmount) : donationAmount || 100,
+    currency: donationCurrency,
+    payment_options:
+      donationCurrency === "NGN"
+        ? "card,mobilemoney,ussd,banktransfer"
+        : "card",
+    customer: {
+      email: donorEmail || "donor@onegsason.org",
+      name: donorName || "Anonymous Donor",
+      phone_number: "00000000000",
+    },
+    customizations: {
+      title: "Oneg Sason Donation",
+      description:
+        donationType === "monthly"
+          ? "Monthly donation"
+          : "One-time donation",
+      logo: "https://onegsason.org/images/logo.jpeg",
+    },
+  };
 
-  const handleFlutterPayment = useFlutterwave(flutterConfig as any);
+  const handleFlutterPayment = useFlutterwave(flutterConfig);
 
-  useEffect(() => {
+useEffect(() => {
     if (flutterTxRef && flutterInitRef.current) {
       flutterInitRef.current = false;
-      handleFlutterPayment({
-        callback: async (response) => {
-          if (response.status === "successful") {
-            const finalAmount = customAmount
-              ? parseInt(customAmount)
-              : donationAmount || 100;
-            try {
-              await fetch("/api/flutterwave/verify", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  transaction_id: response.transaction_id,
-                  tx_ref: response.tx_ref,
-                  amount: finalAmount,
-                  donationType,
-                  currency: donationCurrency,
-                  email: donorEmail || null,
-                }),
-              });
-            } catch {
-              // donation still recorded by webhook/admin
-            }
-            setShowDonateThankYou(true);
-            setDonationLoading(false);
-          }
-          closePaymentModal();
-        },
-        onClose: () => {
+      const failSafe = setTimeout(() => {
+        setDonationLoading(false);
+        setFlutterError(
+          "Payment window took too long to open. Please check your connection and try again.",
+        );
+      }, 20000);
+      (async () => {
+        try {
+          await handleFlutterPayment({
+            callback: async (response) => {
+              clearTimeout(failSafe);
+              if (response.status === "successful") {
+                const finalAmount = customAmount
+                  ? parseInt(customAmount)
+                  : donationAmount || 100;
+                try {
+                  await fetch("/api/flutterwave/verify", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      transaction_id: response.transaction_id,
+                      tx_ref: response.tx_ref,
+                      amount: finalAmount,
+                      donationType,
+                      currency: donationCurrency,
+                      email: donorEmail || null,
+                    }),
+                  });
+                } catch {
+                  // donation still recorded by webhook/admin
+                }
+                setShowDonateThankYou(true);
+                setDonationLoading(false);
+              }
+              closePaymentModal();
+            },
+            onClose: () => {
+              clearTimeout(failSafe);
+              setDonationLoading(false);
+              setFlutterTxRef("");
+            },
+          });
+        } catch {
+          clearTimeout(failSafe);
           setDonationLoading(false);
-          setFlutterTxRef("");
-        },
-      });
+          setFlutterError(
+            "The payment provider could not be reached. Please verify our payment settings and try again.",
+          );
+        }
+      })();
     }
   }, [flutterTxRef]);
 
@@ -453,6 +471,7 @@ export default function GetInvolvedPage() {
                       : donationAmount;
                     if (!finalAmount || finalAmount < 1) return;
                     setDonationLoading(true);
+                    setFlutterError(null);
                     flutterInitRef.current = true;
                     setFlutterTxRef(
                       `OSEF-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
@@ -474,6 +493,11 @@ export default function GetInvolvedPage() {
                       " " +
                       (donationType === "monthly" ? "Monthly" : "Now")}
                 </button>
+                {flutterError && (
+                  <p className="text-center text-sm text-red-600 mt-3 bg-red-50 border border-red-200 rounded-lg p-3">
+                    {flutterError}
+                  </p>
+                )}
                 <p className="text-center text-xs text-gray-500 mt-3">
                   <ExternalLink size={12} className="inline mr-1" />
                   Powered by Flutterwave · Secure payment
