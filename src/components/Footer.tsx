@@ -99,11 +99,17 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-5">
-              <Image src="/images/logo.jpeg" alt="" width={100} height={10} />
+              <Image
+                src="/images/logo.jpeg"
+                alt="OnegSason — Oneg Sason Empowerment Foundation"
+                width={100}
+                height={10}
+              />
             </Link>
             <p className="text-green-200 text-sm leading-relaxed mb-5">
-              Empowering communities worldwide through education,
-              compassion, and human dignity since 2020.
+              OnegSason (Oneg Sason Empowerment Foundation) empowers communities
+              worldwide through education, compassion, and human dignity since
+              2020.
             </p>
             <div className="flex gap-3">
               {[
@@ -218,7 +224,8 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="py-5 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-green-400 text-xs">
-            © {new Date().getFullYear()} Oneg Sason . All rights reserved.
+            © {new Date().getFullYear()} OnegSason (Oneg Sason Empowerment
+            Foundation). All rights reserved.
           </p>
           <div className="flex gap-5">
             {["Privacy Policy", "Terms of Use", "Cookie Policy"].map((item) => (

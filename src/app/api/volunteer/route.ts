@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { sql } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
   let body: Record<string, unknown>;
@@ -12,7 +12,8 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { firstName, lastName, email, country, areasOfInterest, introduction } = body;
+  const { firstName, lastName, email, country, areasOfInterest, introduction } =
+    body;
 
   if (!firstName || !lastName || !email) {
     return NextResponse.json(
@@ -21,18 +22,30 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { error } = await supabaseAdmin.from("volunteer_applications").insert({
-    first_name: firstName,
-    last_name: lastName,
-    email,
-    country: country || null,
-    areas_of_interest: areasOfInterest || [],
-    introduction: introduction || null,
-  });
+  try {
+    await sql`
+      INSERT INTO volunteer_applications (
+        first_name,
+        last_name,
+        email,
+        country,
+        areas_of_interest,
+        introduction
+      )
+      VALUES (
+        ${firstName as string},
+        ${lastName as string},
+        ${email as string},
+        ${(country as string) || null},
+        ${(areasOfInterest as string[]) || []},
+        ${(introduction as string) || null}
+      )
+    `;
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ success: true });
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : "Failed to submit application.";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
-
-  return NextResponse.json({ success: true });
 }

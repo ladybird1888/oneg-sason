@@ -11,9 +11,12 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About Us",
+  title: "About OnegSason",
   description:
-    "Learn about Oneg Sason Empowerment Foundation — a faith-driven nonprofit restoring hope and dignity to vulnerable communities across Africa.",
+    "Learn about OnegSason (Oneg Sason Empowerment Foundation) — a faith-driven nonprofit restoring hope and dignity to vulnerable communities across Africa.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 import { values } from "@/lib/constants";
 
@@ -66,15 +69,15 @@ export default function AboutPage() {
         />
         <div className="relative max-w-4xl mx-auto px-4 text-center text-white">
           <p className="text-yellow-400 uppercase tracking-widest text-sm font-medium mb-4">
-            About Oneg Sason Empowerment Foundation
+            About OnegSason
           </p>
           <h1 className="font-display text-5xl sm:text-6xl font-bold mb-6">
             Who We Are
           </h1>
           <p className="text-green-200 text-xl leading-relaxed max-w-2xl mx-auto">
-            Oneg Sason is a faith-based organization dedicated to supporting and
-            empowering vulnerable communities through compassionate service and
-            practical assistance.
+            OnegSason (Oneg Sason Empowerment Foundation) is a faith-based
+            organization dedicated to supporting and empowering vulnerable
+            communities through compassionate service and practical assistance.
           </p>
         </div>
       </section>

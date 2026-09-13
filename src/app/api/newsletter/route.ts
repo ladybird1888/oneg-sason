@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { sql } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
   let body: { email?: string };
@@ -14,26 +14,40 @@ export async function POST(req: NextRequest) {
 
   const { email } = body;
 
-  if (!email) {
+  if (!email || typeof email !== "string") {
     return NextResponse.json(
       { error: "Email is required." },
       { status: 400 },
     );
   }
 
-  const { error } = await supabaseAdmin.from("newsletter_subscribers").insert({
-    email: email.toLowerCase(),
-  });
+  const normalizedEmail = email.trim().toLowerCase();
 
-  if (error) {
-    if (error.code === "23505") {
+  try {
+    await sql`
+      INSERT INTO users (email, source)
+      VALUES (${normalizedEmail}, 'newsletter')
+    `;
+
+    return NextResponse.json({ success: true });
+  } catch (error: unknown) {
+    const code =
+      typeof error === "object" &&
+      error !== null &&
+      "code" in error &&
+      typeof (error as { code: unknown }).code === "string"
+        ? (error as { code: string }).code
+        : null;
+
+    if (code === "23505") {
       return NextResponse.json(
         { error: "This email is already subscribed." },
         { status: 409 },
       );
     }
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
 
-  return NextResponse.json({ success: true });
+    const message =
+      error instanceof Error ? error.message : "Failed to subscribe.";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }

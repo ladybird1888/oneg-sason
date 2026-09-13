@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { sql } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
   let body: Record<string, unknown>;
@@ -12,28 +12,58 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { organizationName, organizationType, contactName, jobTitle, email, areaOfInterest, message } = body;
+  const {
+    organizationName,
+    organizationType,
+    contactName,
+    jobTitle,
+    email,
+    areaOfInterest,
+    message,
+  } = body;
 
-  if (!organizationName || !organizationType || !contactName || !email || !message) {
+  if (
+    !organizationName ||
+    !organizationType ||
+    !contactName ||
+    !email ||
+    !message
+  ) {
     return NextResponse.json(
-      { error: "Organization name, organization type, contact name, email, and message are required." },
+      {
+        error:
+          "Organization name, organization type, contact name, email, and message are required.",
+      },
       { status: 400 },
     );
   }
 
-  const { error } = await supabaseAdmin.from("partnership_inquiries").insert({
-    organization_name: organizationName,
-    organization_type: organizationType,
-    contact_name: contactName,
-    job_title: jobTitle || null,
-    email,
-    area_of_interest: areaOfInterest || null,
-    message,
-  });
+  try {
+    await sql`
+      INSERT INTO partnership_inquiries (
+        organization_name,
+        organization_type,
+        contact_name,
+        job_title,
+        email,
+        area_of_interest,
+        message
+      )
+      VALUES (
+        ${organizationName as string},
+        ${organizationType as string},
+        ${contactName as string},
+        ${(jobTitle as string) || null},
+        ${email as string},
+        ${(areaOfInterest as string) || null},
+        ${message as string}
+      )
+    `;
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ success: true });
+  } catch (error: unknown) {
+    const errMessage =
+      error instanceof Error ? error.message : "Failed to submit inquiry.";
+    return NextResponse.json({ error: errMessage }, { status: 500 });
   }
-
-  return NextResponse.json({ success: true });
 }
