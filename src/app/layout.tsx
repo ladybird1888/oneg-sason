@@ -2,60 +2,61 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import {
+  BRAND,
+  SITE_URL,
+  organizationJsonLd,
+  websiteJsonLd,
+} from "@/lib/seo";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.onegsason.org"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Oneg Sason Empowerment Foundation | Empowerment through hope",
-    template: "%s | Oneg Sason Empowerment Foundation",
+    default: `${BRAND.compactName} | ${BRAND.name}`,
+    template: `%s | ${BRAND.compactName}`,
   },
-  description:
-    "Oneg Sason Empowerment Foundation is a faith-driven charity transforming lives through community development, education, healthcare, and supporting vulnerable families.",
-  keywords: [
-    "Oneg Sason",
-    "Oneg Sason Foundation",
-    "Oneg Sason Empowerment Foundation",
-    "onegsason",
-    "charity in Nigeria",
-    "non-profit",
-    "foundation",
-    "community development",
-    "education",
-    "healthcare",
-    "donate",
-    "volunteer",
-  ],
-  applicationName: "Oneg Sason Empowerment Foundation",
+  description: BRAND.description,
+  keywords: [...BRAND.keywords],
+  applicationName: BRAND.compactName,
+  authors: [{ name: BRAND.name, url: SITE_URL }],
+  creator: BRAND.name,
+  publisher: BRAND.name,
+  category: "Nonprofit Organization",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
-    siteName: "Oneg Sason Empowerment Foundation",
-    title: "Oneg Sason Empowerment Foundation | Empowerment through hope",
-    description:
-      "A faith-driven charity transforming lives through community development, education, and healthcare. Donate today.",
-    url: "https://www.onegsason.org",
-    locale: "en_US",
+    siteName: BRAND.compactName,
+    title: `${BRAND.compactName} | ${BRAND.name}`,
+    description: BRAND.description,
+    url: SITE_URL,
+    locale: "en_NG",
     images: [
       {
         url: "/images/hero.jpg",
         width: 1200,
         height: 630,
-        alt: "Oneg Sason Empowerment Foundation",
+        alt: `${BRAND.compactName} — ${BRAND.name}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Oneg Sason Empowerment Foundation",
-    description:
-      "A faith-driven charity transforming lives through community development, education, and healthcare. Donate today.",
+    title: `${BRAND.compactName} | ${BRAND.name}`,
+    description: BRAND.description,
     images: ["/images/hero.jpg"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 
@@ -80,31 +81,13 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "NGO",
-              name: "Oneg Sason Empowerment Foundation",
-              alternateName: "Oneg Sason",
-              url: "https://www.onegsason.org",
-              logo: "https://www.onegsason.org/images/logo.jpeg",
-              image: "https://www.onegsason.org/images/hero.jpg",
-              description:
-                "A faith-driven, community-centered charity empowering vulnerable families through education, healthcare, and food support.",
-              foundingDate: "2020",
-              nonprofitStatus: "Nonprofit501c3",
-            }),
+            __html: JSON.stringify(organizationJsonLd()),
           }}
         />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: "Oneg Sason Empowerment Foundation",
-              alternateName: "Oneg Sason",
-              url: "https://www.onegsason.org",
-            }),
+            __html: JSON.stringify(websiteJsonLd()),
           }}
         />
       </head>

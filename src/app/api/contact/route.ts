@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { sql } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
   let body: Record<string, string>;
@@ -22,16 +22,15 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { error: dbError } = await supabaseAdmin.from("contact_messages").insert({
-    first_name: firstName,
-    last_name: lastName,
-    email,
-    subject,
-    message,
-  });
-
-  if (dbError) {
-    return NextResponse.json({ error: dbError.message }, { status: 500 });
+  try {
+    await sql`
+      INSERT INTO contact_messages (first_name, last_name, email, subject, message)
+      VALUES (${firstName}, ${lastName}, ${email}, ${subject}, ${message})
+    `;
+  } catch (error: unknown) {
+    const messageText =
+      error instanceof Error ? error.message : "Failed to save message.";
+    return NextResponse.json({ error: messageText }, { status: 500 });
   }
 
   try {

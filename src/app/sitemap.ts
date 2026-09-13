@@ -1,13 +1,45 @@
 import { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://www.onegsason.org";
+  const lastModified = new Date();
+
   return [
-    { url: base, changeFrequency: "weekly", priority: 1.0 },
-    { url: `${base}/about`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/our-work`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/get-involved`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/contact`, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${base}/impact-partners`, changeFrequency: "monthly", priority: 0.6 },
+    {
+      url: SITE_URL,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 1.0,
+    },
+    {
+      url: `${SITE_URL}/about`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/our-work`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/get-involved`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/impact-partners`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/contact`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
   ];
 }

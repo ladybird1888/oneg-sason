@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getFlw } from "@/lib/flutterwave";
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { sql } from "@/lib/db";
 
 export async function POST(req: Request) {
   try {
@@ -26,19 +26,31 @@ export async function POST(req: Request) {
         );
       }
 
-      const { error } = await supabaseAdmin.from("donations").upsert(
-        {
-          tx_ref: tx_ref || response.data.tx_ref,
-          amount: verifiedAmount || amount || response.data.amount,
-          donation_type: donationType || "once",
-          currency: verifiedCurrency || currency || "NGN",
-          email: email || response.data.customer?.email || null,
-        },
-        { onConflict: "tx_ref" },
-      );
+      const donationTxRef = tx_ref || response.data.tx_ref;
+      const donationAmount = verifiedAmount || amount || response.data.amount;
+      const donationTypeValue = donationType || "once";
+      const donationCurrency = verifiedCurrency || currency || "NGN";
+      const donationEmail =
+        email || response.data.customer?.email || null;
 
-      if (error) {
-        console.error("Supabase insert error:", error);
+      try {
+        await sql`
+          INSERT INTO donations (tx_ref, amount, donation_type, currency, email)
+          VALUES (
+            ${donationTxRef},
+            ${donationAmount},
+            ${donationTypeValue},
+            ${donationCurrency},
+            ${donationEmail}
+          )
+          ON CONFLICT (tx_ref) DO UPDATE SET
+            amount = EXCLUDED.amount,
+            donation_type = EXCLUDED.donation_type,
+            currency = EXCLUDED.currency,
+            email = COALESCE(EXCLUDED.email, donations.email)
+        `;
+      } catch (error) {
+        console.error("Neon insert error:", error);
         return NextResponse.json(
           { error: "Failed to record donation" },
           { status: 500 },

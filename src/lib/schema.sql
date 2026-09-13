@@ -1,4 +1,4 @@
--- Run this in your Supabase SQL editor (https://supabase.com/dashboard/project/_/sql/new)
+-- Neon / PostgreSQL schema for Oneg Sason
 
 CREATE TABLE IF NOT EXISTS volunteer_applications (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -24,10 +24,12 @@ CREATE TABLE IF NOT EXISTS partnership_inquiries (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS newsletter_subscribers (
+-- Newsletter "Get updates..." subscribers — one unique user per email
+CREATE TABLE IF NOT EXISTS users (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   email TEXT NOT NULL UNIQUE,
-  subscribed_at TIMESTAMPTZ DEFAULT NOW()
+  source TEXT NOT NULL DEFAULT 'newsletter',
+  created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS contact_messages (
@@ -49,6 +51,3 @@ CREATE TABLE IF NOT EXISTS donations (
   email TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
-
--- If the donations table already exists (ran schema before this line was added):
-ALTER TABLE donations ADD COLUMN IF NOT EXISTS tx_ref TEXT UNIQUE;

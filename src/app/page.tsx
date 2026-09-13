@@ -17,12 +17,18 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import { values } from "@/lib/constants";
 
 export const metadata: Metadata = {
+  title: {
+    absolute: "OnegSason | Oneg Sason Empowerment Foundation",
+  },
   description:
-    "Oneg Sason Empowerment Foundation is a faith-driven nonprofit empowering vulnerable families through community development, education, healthcare, and food support. Donate today.",
+    "OnegSason (Oneg Sason Empowerment Foundation) is a faith-driven nonprofit empowering vulnerable families through community development, education, healthcare, and food support. Donate today.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Oneg Sason Empowerment Foundation",
+    title: "OnegSason | Oneg Sason Empowerment Foundation",
     description:
-      "A faith-driven nonprofit transforming lives through community development, education, and healthcare.",
+      "OnegSason is a faith-driven nonprofit transforming lives through community development, education, and healthcare.",
     url: "https://www.onegsason.org",
   },
 };
@@ -106,9 +112,9 @@ export default function HomePage() {
             Growing <span className="text-green-300">Together.</span>
           </h1>
           <p className="text-white/80 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-            Oneg Sason Empowerment Foundation connects communities, restores
-            ecosystems, and empowers millions of people to build lives of
-            dignity and purpose.
+            OnegSason — Oneg Sason Empowerment Foundation — connects
+            communities, restores ecosystems, and empowers millions of people to
+            build lives of dignity and purpose.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

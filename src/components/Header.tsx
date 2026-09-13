@@ -40,7 +40,13 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <Image src="/images/logo.jpeg" alt="" width={100} height={10} />
+            <Image
+              src="/images/logo.jpeg"
+              alt="OnegSason — Oneg Sason Empowerment Foundation"
+              width={100}
+              height={10}
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
